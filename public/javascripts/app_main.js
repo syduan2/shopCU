@@ -3,6 +3,7 @@ var app=angular.module("feed", []);
 app.controller("feed_populate",['$scope',function($scope){
   $scope.input_name="name";
   $scope.input_url="google.com";
+  $scope.categories=['Tech','Clothes','Textbooks'];
   $scope.items=[
     {'name' : 'camera', 'url' : 'http://ecx.images-amazon.com/images/I/319lZQWPEuL._AC_SY220_.jpg'},
     {'name' : 'phone', 'url' : 'http://ecx.images-amazon.com/images/I/41K8jK0oS1L._AC_SY220_.jpg'},
@@ -15,7 +16,7 @@ app.controller("feed_populate",['$scope',function($scope){
   };
   $scope.search=function(){
     $http.get('/search?q='+$scope.search_box);
-    
+
   }
 
 }]);
