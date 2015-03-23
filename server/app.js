@@ -5,7 +5,7 @@ app.get('/', function (req, res) {
   res.sendfile('/public/index.html')
 })
 
-var server = app.listen(80, '54.148.216.53', function () {
+var server = app.listen(80, '172.31.25.128', function () {
 
   var host = server.address().address
   var port = server.address().port
