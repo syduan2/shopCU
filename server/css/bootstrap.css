@@ -10,6 +10,7 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
+
 body {
   margin: 0;
 }
@@ -1588,6 +1589,8 @@ pre code {
   margin-right: auto;
   margin-left: auto;
 }
+
+
 .row {
   margin-right: -15px;
   margin-left: -15px;
