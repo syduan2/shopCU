@@ -7,7 +7,7 @@ db.once('open', function (callback) {
     name: String
   })
   var Kitten = mongoose.model('Kitten', kittySchema)
-  var silence = new Kitten({ name: 'Silence' })
+  var silence = new Kitten({ name: 'swagkitten' })
   console.log(silence.name);
   silence.save(function (err, fluffy) {
     if (err) return console.error(err);
