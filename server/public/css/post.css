@@ -1,0 +1,14 @@
+textarea {
+	resize: none;
+	width: 350px;
+	height: 350px;
+	margin-top: 0px;
+	-webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+label {
+	padding-left: 5px;
+	padding-top: 3px;
+}

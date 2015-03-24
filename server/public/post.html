@@ -1,0 +1,121 @@
+<html>
+<head>
+  <title>shopCU</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+  <!--<script src="/javascripts/app_main.js"></script>-->
+  <script src="javascripts/app_main.js"></script>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <link href="css/post.css" rel="stylesheet">
+</head>
+
+<body ng-app="feed" ng-controller="feed_populate">
+  <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">shopCU</a>
+      </div>
+      <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="#/Buy">Buy</a>
+          </li>
+          <li>
+            <a href="#/Sell">Sell</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</body>
+
+
+
+<div class="container">
+    <div class="row"><h2>What are you selling?</h2></div>
+    	<div class="row">
+	        <form class="form-group" role="form">
+	        	<div class="form-group form-group-lg">
+	        		<div class="col-lg-11">
+	        			<input type="text" class="form-control" id="text" placeholder="Title of post (ex. Air Guitar Fresh Condition)">
+	          	</div>
+	        	</div>
+	        </form>
+	      <div class="col-lg-1">
+	        <div class="btn-group" role="group" aria-label="...">
+           	<button type="submit" class="btn btn-lg btn-primary">Post</button>
+          </div>
+	      </div>
+    	</div>
+
+    <div class="row">
+    	<div class="col-lg-4">
+    		<h3>Description</h3>
+    		<textarea class="req" tabindex="1" rows="10" id="PostingBody" name="PostingBody" placeholder="Ex. Authentic Air (Slightly polluted)"></textarea>
+    	</div>
+
+    	<div class="col-lg-4">
+    		<h3>Tag your post</h3>
+    		<div class="panel panel-default">
+    			<div class="panel-body">
+    				<div class="input-group">
+      				<input type="radio" name="tags" id="apartments" value="apartments">
+       				<label for="apartments">Apartments</label><br>
+
+       				<input type="radio" name="tags" id="bikes" value="bikes">
+       				<label for="bikes">Bikes/Motorcycles/Cars</label><br>
+
+       				<input type="radio" name="tags" id="clothing" value="clothing">
+       				<label for="clothing">Clothing</label><br>
+
+       				<input type="radio" name="tags" id="electronics" value="electronics">
+       				<label for="electronics">Electronics</label><br>
+
+       				<input type="radio" name="tags" id="appliances" value="appliances">
+       				<label for="appliances">Household Appliances</label><br>
+
+       				<input type="radio" name="tags" id="tickets" value="tickets">
+       				<label for="tickets">Tickets</label><br>
+
+       				<input type="radio" name="tags" id="misc" value="misc">
+       				<label for="misc">Miscellaneous</label>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+
+    <div class="col-lg-4">
+    	<h3>Contact Info</h3>
+    	<div class="panel panel-default">
+    		<div class="panel-body">
+	    		<div class="input-group">
+	    				<span class="input-group-addon" id="sizing-addon1">E-mail:</span> 
+	    				<input type="email" class="form-control" id="text" placeholder="personal@email.com">
+	    		</div><br>
+	    		<div class="input-group">
+	    				<span class="input-group-addon" id="sizing-addon1">Phone:</span> 
+	    				<input type="tel" class="form-control" id="text" placeholder="(111) 222-3333 (Optional)">	
+	    		</div>
+
+	    		<h5>Preferred Method(s) of Contact:</h5>
+	    		<input type="checkbox" name="facebook" value="facebook">
+	    		<label for="facebook">Facebook</label><br>
+
+					<input type="checkbox" name="call" value="call">
+	    		<label for="call">Phone Call</label><br>
+
+	    		<input type="checkbox" name="textmsg" value="textmsg">
+	    		<label for="textmsg">Text Message</label><br>   
+
+	    		<input type="checkbox" name="e-mail" value="e-mail">
+	    		<label for="e-mail">E-mail</label>		
+	    	</div>
+    	</div>
+    </div>
+  </div>
+</div>
+
+</html>
+
