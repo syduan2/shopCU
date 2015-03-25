@@ -1,5 +1,5 @@
 var express = require('express')
-require('./models/items');
+require('../models/items');
 module.exports=function(app, mongoose){
   var item = mongoose.model('Item');
   app.get('/items', function(req, res, next) {
