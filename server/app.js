@@ -3,12 +3,11 @@ var app = express()
 
 //Database Stuff
 var mongoose = require('mongoose');
-require('./models/items');
-require('./routes/index')
+
 mongoose.connect('mongodb://localhost/items');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-require('./routes')(app, db);
+require('./routes/index')(app, mongoose);
 
 
 

@@ -1,11 +1,11 @@
-var mongoose = require('mongoose');
 var express = require('express')
-var item = mongoose.model('Item');
-module.exports=function(app, db){
+require('./models/items');
+module.exports=function(app, mongoose){
+  var item = mongoose.model('Item');
   app.get('/items', function(req, res, next) {
-    item.find(function(err, posts){
+    item.find(function(err, items){
       if(err){ return next(err); }
-      res.send("HELLO");
+      res.json(items);
     });
   });
 };
