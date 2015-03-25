@@ -1,6 +1,6 @@
 textarea {
 	resize: none;
-	width: 350px;
+	width: 359px;
 	height: 350px;
 	margin-top: 0px;
 	-webkit-border-radius: 5px;
@@ -19,4 +19,8 @@ br.br1 {
 
 .padleft {
 	padding-left: 10px;
+}
+
+.padbot {
+	padding-top: 1px;
 }

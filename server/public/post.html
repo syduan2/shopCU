@@ -55,6 +55,14 @@
     	<div class="col-lg-4">
     		<h3>Description</h3>
     		<textarea class="req" tabindex="1" rows="10" id="PostingBody" name="PostingBody" placeholder="Ex. Authentic Air (Slightly polluted)"></textarea>
+
+        <h3>Upload Images</h3>
+        <div class="panel panel-default">
+          <form action="demo_form.asp">
+            <h4 class="padleft">Select images:</h4> <input class="padleft" type="file" name="img" multiple>
+          </form>
+        </div>
+
     	</div>
 
     	<div class="col-lg-4">
@@ -88,7 +96,18 @@
     			</div>
     		</div>
         <ul class="list-group">
-          <li class="list-group-item">This will help other's find your item.</li>
+          <li class="list-group-item padbot">
+            <h3>Price your post</h3>
+            <div class="input-group">
+              <span class="input-group-addon">$</span>
+              <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="9000.01">
+            </div>
+            <input type="checkbox" name="negotiable" id="negotiable" value="negotiable">
+            <label for"negotiable">Negotiable Price</label><br>
+            <input type="checkbox" name="trade" id="trade" value="trade">
+            <label for"trade">Trade me maybe?*</label>
+          </li>
+          <li class="list-group-item">*If willing to trade, elaborate in Description section.</li>
         </ul>
     	</div>
     </div>
@@ -123,24 +142,6 @@
     	</div>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-lg-4"><h3>Upload Images</h3></div>
-  </div>
-
-  
-  <div class="row">  
-    <div class="col-lg-4">
-      <div class="panel panel-default">
-        <form action="demo_form.asp">
-          <h4 class="padleft">Select images:</h4> <input class="padleft" type="file" name="img" multiple>
-        </form>
-      </div>
-    </div>
-  </div>
-
-
-
 </div>
 
 </html>
