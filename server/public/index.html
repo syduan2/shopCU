@@ -1,17 +1,24 @@
-<html>
+<html ng-app="shopcu_main">
 <head>
   <title>shopCU</title>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
-  <!--<script src="/javascripts/app_main.js"></script>-->
+  <script src="javascripts/dropzone.js"></script>
+  <script src="bower_components/jquery/src/jquery.js"></script>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+
   <script src="javascripts/app_main.js"></script>
+  <script src="javascripts/controllers.js"></script>
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <link href="css/post.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/font-awesome-4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/dropzone.css">
+
 </head>
 
-<body ng-app="feed" ng-controller="feed_populate">
+<body>
   <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
@@ -32,53 +39,7 @@
       </div>
     </div>
   </nav>
-
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search for...">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="button">
-              <span class="glyphicon glyphicon-search"></span> Search
-            </button>
-          </span>
-        </div><!-- /input-group -->
-      </div><!-- /.col-lg-6 -->
-    </div><!-- /.row -->
-
-  <div class="container">
-    <div class="col-lg-2">
-      <p class="lead">
-        Categories
-      </p>
-      <div class="list-group">
-        <div class="list-group-item" ng-repeat="category in categories">
-          {{category}}
-        </div>
-      </div>
-    </div>
-
-
-    <div class="col-lg-4">
-      <div class="container">
-
-        <!--<br> Name: <input type="text" ng-model="input_name">
-        <br> URL: <input type="text" ng-model="input_url">
-        <br><button class="btn" ng-click="add_item()">add</button>-->
-      </div>
-      <div class= "row" ng-repeat="item in items">
-        <div class="thumbnail">
-        <img src={{item.img_link}}>
-          <div class="caption">
-            {{item.Name}}
-          </div>
-        </div>
-      </div>
-
-  </div>
-    </div>
-  </ul>
+  <div ng-view class="container"></div>
 
 </body>
 </html>
