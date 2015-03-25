@@ -10,5 +10,13 @@ textarea {
 
 label {
 	padding-left: 5px;
-	padding-top: 3px;
+	padding-top: 4px;
+}
+
+br.br1 {
+	padding-top: 2px;
+}
+
+.padleft {
+	padding-left: 10px;
 }
