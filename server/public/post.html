@@ -4,12 +4,14 @@
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
   <!--<script src="/javascripts/app_main.js"></script>-->
   <script src="javascripts/app_main.js"></script>
+  <script src="javascripts/dropzone.js"></script>
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <link href="css/post.css" rel="stylesheet">
   <link rel="stylesheet" href="css/font-awesome-4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/dropzone.css">
 </head>
 
 <body ng-app="feed" ng-controller="feed_populate">
@@ -58,10 +60,10 @@
 
         <h3>Upload Images</h3>
         <div class="panel panel-default">
-          <form action="demo_form.asp">
+          <!-- <form action="demo_form.asp">
             <h4 class="padleft">Select images:</h4> <input class="padleft" type="file" name="img" multiple>
-          </form>
-
+          </form> -->
+          <form action="/item-images" class="dropzone dz-clickable"></form>
           <ul class="list-group"><li class="list-group-item">You can select multiple files with CMD on Mac or CTRL on Windows</li></ul>
         </div>
 
@@ -120,12 +122,12 @@
     	<div class="panel panel-default">
     		<div class="panel-body">
 	    		<div class="input-group">
-	    				<span class="input-group-addon" id="sizing-addon1">E-mail:</span> 
+	    				<span class="input-group-addon" id="sizing-addon1">E-mail:</span>
 	    				<input type="email" class="form-control" id="text" placeholder="personal@email.com">
 	    		</div><br>
 	    		<div class="input-group">
-	    				<span class="input-group-addon" id="sizing-addon1">Phone:</span> 
-	    				<input type="tel" class="form-control" id="text" placeholder="(111) 222-3333 (Optional)">	
+	    				<span class="input-group-addon" id="sizing-addon1">Phone:</span>
+	    				<input type="tel" class="form-control" id="text" placeholder="(111) 222-3333 (Optional)">
 	    		</div>
 
 	    		<h5>Preferred Method(s) of Contact:</h5>
@@ -136,10 +138,10 @@
 	    		<label for="call">Phone Call</label><br>
 
 	    		<input type="checkbox" name="textmsg" value="textmsg">
-	    		<label for="textmsg">Text Message</label><br>   
+	    		<label for="textmsg">Text Message</label><br>
 
 	    		<input type="checkbox" name="e-mail" value="e-mail">
-	    		<label for="e-mail">E-mail</label>		
+	    		<label for="e-mail">E-mail</label>
 	    	</div>
     	</div>
     </div>
@@ -147,4 +149,3 @@
 </div>
 
 </html>
-
