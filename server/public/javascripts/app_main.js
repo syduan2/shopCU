@@ -8,7 +8,11 @@ app.config(['$routeProvider',
       }).
       when('/register', {
         templateUrl: 'views/register.html',
-        controller: 'register'
+        controller: 'register_controller'
+      }).
+      when('/sell', {
+        templateUrl: 'views/post.html',
+        controller: 'sell_controller'
       }).
       otherwise({
         redirectTo: '/home'
