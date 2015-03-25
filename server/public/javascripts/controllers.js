@@ -21,6 +21,6 @@ controllers.controller("feed_populate",['$scope', '$http', function($scope, $htt
 }]);
 
 controllers.controller("sell_controller",['$scope', '$http', function($scope, $http){
-  var myDropzone = new Dropzone("dropzone", { url: "/image-upload"});
-
+  //var myDropzone = new Dropzone("dropzone", { url: "/image-upload"});
+  $("dropzone").dropzone({ url: "/file/post" });
 }]);
