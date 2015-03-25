@@ -5,13 +5,11 @@
  */
 
 body {
-	margin-top: 50px;
-	margin-bottom: 50px;
 	background: none;
 }
 
 .full {
-	background: url(http://i.imgur.com/LW0hn3Q.jpg?1) no-repeat center center fixed; 
+	background: url(http://i.imgur.com/LW0hn3Q.jpg?1) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
