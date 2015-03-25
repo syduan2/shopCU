@@ -12,11 +12,15 @@ controllers.controller("feed_populate",['$scope', '$http', function($scope, $htt
     error(function(data, status, headers, config) {
       console.log("OHNOES")
     });
-    //var myDropzone = new Dropzone("dropzone", { url: "/image-upload"});
   });
   $scope.search=function(){
     $http.get('/search?q='+$scope.search_box);
 
   }
+
+}]);
+
+controlles.controller("sell_controller",['$scope', '$http', function($scop, $http){
+  var myDropzone = new Dropzone("dropzone", { url: "/image-upload"});
 
 }]);
