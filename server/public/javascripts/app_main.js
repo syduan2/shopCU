@@ -13,7 +13,7 @@ app.controller("feed_populate",['$scope', '$http', function($scope, $http){
     ];
   $http.get('/items').
   success(function(data, status, headers, config) {
-    $scope.items.concat(angular.fromJson(data));
+    $scope.items=angular.fromJson(data);
     console.log($scope.items)
   }).
   error(function(data, status, headers, config) {
