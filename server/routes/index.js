@@ -16,6 +16,4 @@ module.exports=function(app, mongoose){
   });
   item_instance.save()
 
-  post.save(function(err, post){
-
 };
