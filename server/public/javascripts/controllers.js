@@ -20,7 +20,7 @@ controllers.controller("feed_populate",['$scope', '$http', function($scope, $htt
 
 }]);
 
-controlles.controller("sell_controller",['$scope', '$http', function($scop, $http){
+controlles.controller("sell_controller",['$scope', '$http', function($scope, $http){
   var myDropzone = new Dropzone("dropzone", { url: "/image-upload"});
 
 }]);
