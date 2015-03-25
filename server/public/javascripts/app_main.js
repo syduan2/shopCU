@@ -4,21 +4,25 @@ app.controller("feed_populate",['$scope', '$http', function($scope, $http){
   $scope.input_name="name";
   $scope.input_url="google.com";
   $scope.categories=['Tech','Clothes','Textbooks'];
-  $scope.items=[
+  /*$scope.items=[
     {'Name' : 'camera', 'img_link' : 'http://ecx.images-amazon.com/images/I/319lZQWPEuL._AC_SY220_.jpg'},
     {'Name' : 'phone', 'img_link' : 'http://ecx.images-amazon.com/images/I/41K8jK0oS1L._AC_SY220_.jpg'},
     {'Name' : 'movie', 'img_link' : 'http://ecx.images-amazon.com/images/I/51Cfy5iCp7L._AC_SY220_.jpg'},
     {'Name' : 'ipod', 'img_link' : 'http://ecx.images-amazon.com/images/I/41cwEhtosRL._AC_SY220_.jpg'},
     {'Name' : 'camera', 'img_link' : 'http://ecx.images-amazon.com/images/I/319lZQWPEuL._AC_SY220_.jpg'},
-    ];
-  $http.get('/items').
-  success(function(data, status, headers, config) {
-    $scope.items=angular.fromJson(data);
-    console.log($scope.items)
-  }).
-  error(function(data, status, headers, config) {
-    console.log("OHNOES")
+  ];*/
+  $scope.$on('$viewContentLoaded', function(){
+    $http.get('/items').
+    success(function(data, status, headers, config) {
+      $scope.items=angular.fromJson(data);
+      console.log($scope.items)
+    }).
+    error(function(data, status, headers, config) {
+      console.log("OHNOES")
+    });
+    //var myDropzone = new Dropzone("dropzone", { url: "/image-upload"});
   });
+
 
   $scope.add_item=function(){
     $scope.items.push({'Name' : $scope.input_name, 'url' : $scope.input_url});
