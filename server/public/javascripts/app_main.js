@@ -1,6 +1,6 @@
 var app=angular.module("feed", []);
 
-app.controller("feed_populate",['$scope',function($scope){
+app.controller("feed_populate",['$scope', '$http', function($scope, $http){
   $scope.input_name="name";
   $scope.input_url="google.com";
   $scope.categories=['Tech','Clothes','Textbooks'];
@@ -11,16 +11,14 @@ app.controller("feed_populate",['$scope',function($scope){
     {'Name' : 'ipod', 'img_link' : 'http://ecx.images-amazon.com/images/I/41cwEhtosRL._AC_SY220_.jpg'},
     {'Name' : 'camera', 'img_link' : 'http://ecx.images-amazon.com/images/I/319lZQWPEuL._AC_SY220_.jpg'},
     ];
-  $scope.init=function(){
-    $http.get('/items').
-    success(function(data, status, headers, config) {
-      $scope.items.concat(angular.fromJson(data));
-    }).
-    error(function(data, status, headers, config) {
-      console.log("OHNOES")
-    });
-  };
-
+  $http.get('/items').
+  success(function(data, status, headers, config) {
+    $scope.items.concat(angular.fromJson(data));
+    console.log($scope.items)
+  }).
+  error(function(data, status, headers, config) {
+    console.log("OHNOES")
+  });
 
   $scope.add_item=function(){
     $scope.items.push({'Name' : $scope.input_name, 'url' : $scope.input_url});
