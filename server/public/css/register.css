@@ -1,0 +1,13 @@
+.padtop {
+	top: 200px;
+}
+
+.spacing {
+	padding-top: 20px;
+}
+
+.round {
+	-webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
