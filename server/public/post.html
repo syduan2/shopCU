@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <link href="css/post.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/font-awesome-4.3.0/css/font-awesome.min.css">
 </head>
 
 <body ng-app="feed" ng-controller="feed_populate">
@@ -73,8 +74,11 @@
        				<input type="radio" name="tags" id="electronics" value="electronics">
        				<label for="electronics">Electronics</label><br>
 
-       				<input type="radio" name="tags" id="appliances" value="appliances">
-       				<label for="appliances">Household Appliances</label><br>
+       				<input type="radio" name="tags" id="furniture" value="furniture">
+       				<label for="furniture">Furniture</label><br>
+
+              <input type="radio" name="tags" id="appliances" value="appliances">
+              <label for="appliances">Household Appliances</label><br>
 
        				<input type="radio" name="tags" id="tickets" value="tickets">
        				<label for="tickets">Tickets</label><br>
@@ -83,8 +87,12 @@
        				<label for="misc">Miscellaneous</label>
     			</div>
     		</div>
+        <ul class="list-group">
+          <li class="list-group-item">This will help other's find your item.</li>
+        </ul>
     	</div>
     </div>
+
 
     <div class="col-lg-4">
     	<h3>Contact Info</h3>
@@ -115,6 +123,24 @@
     	</div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-lg-4"><h3>Upload Images</h3></div>
+  </div>
+
+  
+  <div class="row">  
+    <div class="col-lg-4">
+      <div class="panel panel-default">
+        <form action="demo_form.asp">
+          <h4 class="padleft">Select images:</h4> <input class="padleft" type="file" name="img" multiple>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
 </div>
 
 </html>
