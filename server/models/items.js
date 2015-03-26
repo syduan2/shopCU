@@ -12,6 +12,7 @@ module.exports=function(mongoose){
               call: Boolean,
               txtmsg: Boolean,
               email: Boolean
+  	     }
   });
   mongoose.model('Item', itemSchema);
 };
