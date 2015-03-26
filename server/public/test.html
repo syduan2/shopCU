@@ -40,102 +40,118 @@
   </nav>
   <div>
 
-  <link href="css/view.css" rel="stylesheet">
 
-  <div class="container">
+<link href="css/post.css" rel="stylesheet">
+<div class="container">
     <div class="row">
-      <div class="col-lg-12">
-        <ol class="breadcrumb">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Tag</a></li>
-          <li class="active">Item</li>
-        </ol>
-      </div>
-      <div class="col-lg-4 padtopsoft">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-          <!-- Indicators -->
-          <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-            <li data-target="#myCarousel" data-slide-to="3"></li>
-          </ol>
-
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner" role="listbox">
-            <div class="item active">
-              <img src="img_chania.jpg" alt="Chania" width="460" height="345">
-            </div>
-
-            <div class="item">
-              <img src="img_chania2.jpg" alt="Chania" width="460" height="345">
-            </div>
-          
-            <div class="item">
-              <img src="img_flower.jpg" alt="Flower" width="460" height="345">
-            </div>
-
-            <div class="item">
-              <img src="img_flower2.jpg" alt="Flower" width="460" height="345">
+      <div class="col-lg-12"><h2>What are you selling?</h2></div>
+     
+          <div class="col-lg-10 padtop">
+            <div class="form-group form-group-lg">
+              <input type="text" class="form-control" id="title" placeholder="Title of post (ex. Air Guitar Fresh Condition)">
             </div>
           </div>
 
-          <!-- Left and right controls -->
-          <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>  
+        <div class="col-lg-2">
+          <div class="btn" aria-label="...">
+             <button id="submit-form" type="submit" class="btn btn-lg btn-primary">Save</button>
+          </div>
+        </div>
+
       </div>
 
-      <div class="col-lg-1"></div>
+    <div class="row">
+      <div class="col-lg-4">
+        <h3>Description</h3>
+        <textarea class="req" tabindex="1" rows="10" id="description" name="PostingBody" placeholder="Ex. Authentic Air (Slightly polluted)"></textarea>
 
-      <div class="col-lg-7">
-        <h2>My Freaking Fresh Air Guitar REALLY REALLY REALLY REALLY REALLY REALLY
-          REALLREALRLAWRLAWRLWALRAWL LONG</h2>
-        <div class="panel panel-default setheight">
-          <div class="panel-body">
-            It's supa fresh<br>
-            Hella fresh<br>
-            Doesn't come with case
-          </div>
+        <h3>Upload Images</h3>
+        <div class="panel panel-default">
+          <form action="demo_form.asp">
+            <h4 class="padleft">Select images:</h4> <input class="padleft" type="file" name="img" multiple>
+          </form>
+          <ul class="list-group"><li class="list-group-item">You can select multiple files with CMD on Mac or CTRL on Windows</li></ul>
         </div>
       </div>
 
-      <div class="col-lg-6">
-        <h3>$321.23</h3>
-        <h5><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Negotiable Price</h5>
-        <h5><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Willing to Trade</h5>
-      </div>
-
-      <div class="col-lg-3"></div>
-
-      <div class="col-lg-3">
-        <div class="panel panel-primary">
-          <div class="panel-heading">David Swagger Chen</div>
+      <div class="col-lg-4">
+        <h3>Tag your post</h3>
+        <div class="panel panel-default">
           <div class="panel-body">
-            <h5>Email: swagger1@illinois.edu</h5>
-            <h5>Phone: 1-800-HEY-QURL</h5>
-            <h5>Preferred Method(s) of Contact:</h5>
-            <h5><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Facebook</h5>
-            <h5><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Phone Call</h5>
-            <h5><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Text</h5>
-            <h5><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>E-mail</h5>
+            <div class="input-group">
+              <input type="radio" name="tags" id="apartments" value="apartments">
+               <label for="apartments">Apartments</label><br>
+
+               <input type="radio" name="tags" id="bikes" value="bikes">
+               <label for="bikes">Bikes/Motorcycles/Cars</label><br>
+
+               <input type="radio" name="tags" id="clothing" value="clothing">
+               <label for="clothing">Clothing</label><br>
+
+               <input type="radio" name="tags" id="electronics" value="electronics">
+               <label for="electronics">Electronics</label><br>
+
+               <input type="radio" name="tags" id="furniture" value="furniture">
+               <label for="furniture">Furniture</label><br>
+
+              <input type="radio" name="tags" id="appliances" value="appliances">
+              <label for="appliances">Household Appliances</label><br>
+
+               <input type="radio" name="tags" id="tickets" value="tickets">
+               <label for="tickets">Tickets</label><br>
+
+               <input type="radio" name="tags" id="misc" value="misc">
+               <label for="misc">Miscellaneous</label>
           </div>
         </div>
+        <ul class="list-group">
+          <li class="list-group-item padbot">
+            <h3>Price your post</h3>
+            <div class="input-group">
+              <span class="input-group-addon">$</span>
+              <input type="text" class="form-control" id="price" aria-label="Amount (to the nearest dollar)" placeholder="9000.01">
+            </div>
+            <input type="checkbox" name="negotiable" id="negotiable" value="negotiable">
+            <label for"negotiable">Negotiable Price</label><br>
+            <input type="checkbox" name="trade" id="trade" value="trade">
+            <label for"trade">Trade me maybe?*</label>
+          </li>
+          <li class="list-group-item">*If willing to trade, elaborate in Description section.</li>
+        </ul>
       </div>
-
-      <div class="col-lg-12">
-        <h3>Comments</h3>
-        <textarea class="req" tabindex="1" rows="10" id="PostingBody" name="PostingBody" placeholder="Ex. Authentic Air (Slightly polluted)"></textarea>
-      </div>
-      </div>
-
     </div>
+
+
+    <div class="col-lg-4">
+      <h3>Contact Info</h3>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="input-group">
+              <span class="input-group-addon" id="sizing-addon1">E-mail:</span>
+              <input type="email" class="form-control" id="email" placeholder="personal@email.com">
+          </div><br>
+          <div class="input-group">
+              <span class="input-group-addon" id="sizing-addon1">Phone:</span>
+              <input type="tel" class="form-control" id="phone" placeholder="(111) 222-3333 (Optional)">
+          </div>
+
+          <h5>Preferred Method(s) of Contact:</h5>
+          <input type="checkbox" name="facebook" value="facebook">
+          <label for="facebook">Facebook</label><br>
+
+          <input type="checkbox" name="call" value="call">
+          <label for="call">Phone Call</label><br>
+
+          <input type="checkbox" name="textmsg" value="textmsg">
+          <label for="textmsg">Text Message</label><br>
+
+          <input type="checkbox" name="e-mail" value="e-mail">
+          <label for="e-mail">E-mail</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
     
 
