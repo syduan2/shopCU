@@ -1,0 +1,26 @@
+textarea {
+	width: 359px;
+	height: 100px;
+	margin-top: 0px;
+}
+
+
+  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 400px;
+      margin: 0 auto;
+  }
+  .carousel {
+    width: 125%;
+  }
+  .padtop {
+    padding-top: 50px;
+  }
+
+  .padtopsoft {
+    padding-top: 30px;
+  }
+  .setheight {
+    height: 300px;
+    
+  }
