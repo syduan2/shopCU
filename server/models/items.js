@@ -11,7 +11,13 @@ module.exports=function(mongoose){
     methods: {facebook: Boolean,
               call: Boolean,
               txtmsg: Boolean,
-              email: Boolean
+              email: Boolean },
+    images: [String]
   });
   mongoose.model('Item', itemSchema);
+
+  var imageSchema = new mongoose.Schema({
+    data:Buffer
+  });
+  mongoose.model('Image, imageSchema');
 };

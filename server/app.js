@@ -9,6 +9,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 require('./routes/index')(app, mongoose);
 var item = mongoose.model('Item');
+var image = mongoose.model('Image');
 
 
 

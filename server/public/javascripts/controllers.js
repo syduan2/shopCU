@@ -42,7 +42,8 @@ controllers.controller("sell_controller",['$scope', '$http', function($scope, $h
       acceptedFiles: "image/*"});
       myDropzone.on("sending", function(file, xhr, formData) {
       // Will send the filesize along with the file as POST data.
-        formData.append("id", itemID)
+        formData.append("id", itemID);
+        console.log(formData);
       });
       $("#submit-form").click(function(){
         var outPacket={

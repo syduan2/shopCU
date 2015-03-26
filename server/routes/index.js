@@ -1,4 +1,5 @@
 var express = require('express')
+var ObjectID = require('mongodb').ObjectID;
 module.exports=function(app, mongoose){
   require('../models/items')(mongoose);
   var item = mongoose.model('Item');
@@ -24,13 +25,19 @@ module.exports=function(app, mongoose){
                 call: null,
                 txtmsg: null,
                 email: null},
+      images: [null]
     });
     item_instance.save(function(err, instance){
       res.send(instance.id)
     });
   });
 
-  app.
+  app.post('/post-image', function(req, res){
+    var image_instance = new image({
+      //STORE IMAGE
+    })
+    //RETURN ID AND STICK IT INTO THE ImAGES ARRAY IN OUR POST INSTANCE
+  });
 
 
 };
