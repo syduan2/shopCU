@@ -9,11 +9,28 @@ module.exports=function(app, mongoose){
     });
   });
 
-  var item_instance = new item({
-    Name: "swag",
-    img_link: "http://johancutych.com/img/posts/swag.png",
-    views: 36,
+  app.get('/newPost', function (req, res) {
+
+    var item_instance = new item({
+      title: null,
+      description: null,
+      tag: null,
+      price: null,
+      negotiable: null,
+      trade: null,
+      email: null,
+      phone: null,
+      methods: {facebook: null,
+                call: null,
+                txtmsg: null,
+                email: null},
+    });
+    item_instance.save(function(err, instance){
+      res.send(instance.id)
+    });
   });
-  item_instance.save()
+
+  app.
+
 
 };

@@ -19,26 +19,7 @@ app.get('/', function (req, res) {
   res.sendfile('/public/index.html')
 })
 
-app.get('/newPost', function (req, res) {
 
-  var item_instance = new item({
-    title: null,
-    description: null,
-    tag: null,
-    price: null,
-    negotiable: null,
-    trade: null,
-    email: null,
-    phone: null,
-    methods: {facebook: null,
-              call: null,
-              txtmsg: null,
-              email: null},
-  });
-  item_instance.save(function(err, instance){
-    res.send(instance.id)
-  });
-})
 
 var server = app.listen(80, '172.31.25.128', function () {
 
