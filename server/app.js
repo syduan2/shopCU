@@ -22,8 +22,8 @@ app.get('/', function (req, res) {
 
 
 
-var server = app.listen(80, '172.31.25.128', function () {
-//var server = app.listen(80, 'localhost', function () {
+//var server = app.listen(80, '172.31.25.128', function () {
+var server = app.listen(80, 'localhost', function () {
   var host = server.address().address
   var port = server.address().port
 

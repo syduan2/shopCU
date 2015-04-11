@@ -36,6 +36,7 @@ module.exports=function(app, mongoose){
   app.post('/post-image', function(req, res){
     var fs = require('fs');
     //var bodyParser = require('body-parser')
+    console.log()
     fs.writeFile("/tmp/test", JSON.stringify(req), function(err) {
       if(err) {
           return console.log(err);
