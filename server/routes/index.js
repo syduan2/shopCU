@@ -32,7 +32,7 @@ module.exports=function(app, mongoose){
       res.send(instance.id)
     });
   });
-
+//hi
   app.post('/post-image', function(req, res){
     var fs = require('fs');
     //var bodyParser = require('body-parser')
