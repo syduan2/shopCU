@@ -34,9 +34,19 @@ module.exports=function(app, mongoose){
   });
 
   app.post('/post-image', function(req, res){
+    var fs = require('fs');
+    //var bodyParser = require('body-parser')
+    fs.writeFile("/tmp/test", JSON.stringify(req), function(err) {
+      if(err) {
+          return console.log(err);
+      }
+
+      console.log("The file was saved!");
+    });
     var image_instance = new image({
       //STORE IMAGE
     })
+    res.send("success!");
     //RETURN ID AND STICK IT INTO THE ImAGES ARRAY IN OUR POST INSTANCE
   });
 
