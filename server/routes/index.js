@@ -37,7 +37,16 @@ module.exports=function(app, mongoose){
     var fs = require('fs');
     //var bodyParser = require('body-parser')
     console.log()
-    fs.writeFile("/tmp/test", JSON.stringify(req), function(err) {
+    function objToString (obj) {
+      var str = '';
+      for (var p in obj) {
+          if (obj.hasOwnProperty(p)) {
+              str += p + '::' + obj[p] + '\n';
+          }
+      }
+      return str;
+    }
+    fs.writeFile("/tmp/test", objToString(req.files), function(err) {
       if(err) {
           return console.log(err);
       }
