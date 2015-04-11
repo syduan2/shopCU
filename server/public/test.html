@@ -40,118 +40,82 @@
   </nav>
   <div>
 
-
-<link href="css/post.css" rel="stylesheet">
 <div class="container">
-    <div class="row">
-      <div class="col-lg-12"><h2>What are you selling?</h2></div>
-     
-          <div class="col-lg-10 padtop">
-            <div class="form-group form-group-lg">
-              <input type="text" class="form-control" id="title" placeholder="Title of post (ex. Air Guitar Fresh Condition)">
-            </div>
-          </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#">Home</a></li>
+        <li role="presentation"><a href="#">Apartment</a></li>
+        <li role="presentation"><a href="#">Bikes/Motorcycles/Cars</a></li>
+        <li role="presentation"><a href="#">Clothing</a></li>
+        <li role="presentation"><a href="#">Electronics</a></li>
+        <li role="presentation"><a href="#">Furniture</a></li>
+        <li role="presentation"><a href="#">Household Appliances</a></li>
+        <li role="presentation"><a href="#">Tickets</a></li>
+        <li role="presentation"><a href="#">Miscellaneous</a></li>
+      </ul>
+    </div>
+    <div class="col-lg-12">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for...">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span> Search
+          </button>
+        </span>
+      </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+  </div><!-- /.row -->
 
-        <div class="col-lg-2">
-          <div class="btn" aria-label="...">
-             <button id="submit-form" type="submit" class="btn btn-lg btn-primary">Save</button>
-          </div>
+  <div class="col-lg-4">
+    <div class="container">
+
+      <!--<br> Name: <input type="text" ng-model="input_name">
+      <br> URL: <input type="text" ng-model="input_url">
+      <br><button class="btn" ng-click="add_item()">add</button>-->
+    </div>
+    <div class= "row" ng-repeat="item in items">
+      <div class="thumbnail">
+      <img src={{item.img_link}}>
+        <div class="caption">
+          {{item.Name}}
         </div>
-
-      </div>
-
-    <div class="row">
-      <div class="col-lg-4">
-        <h3>Description</h3>
-        <textarea class="req" tabindex="1" rows="10" id="description" name="PostingBody" placeholder="Ex. Authentic Air (Slightly polluted)"></textarea>
-
-        <h3>Upload Images</h3>
-        <div class="panel panel-default">
-          <form action="demo_form.asp">
-            <h4 class="padleft">Select images:</h4> <input class="padleft" type="file" name="img" multiple>
-          </form>
-          <ul class="list-group"><li class="list-group-item">You can select multiple files with CMD on Mac or CTRL on Windows</li></ul>
-        </div>
-      </div>
-
-      <div class="col-lg-4">
-        <h3>Tag your post</h3>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="input-group">
-              <input type="radio" name="tags" id="apartments" value="apartments">
-               <label for="apartments">Apartments</label><br>
-
-               <input type="radio" name="tags" id="bikes" value="bikes">
-               <label for="bikes">Bikes/Motorcycles/Cars</label><br>
-
-               <input type="radio" name="tags" id="clothing" value="clothing">
-               <label for="clothing">Clothing</label><br>
-
-               <input type="radio" name="tags" id="electronics" value="electronics">
-               <label for="electronics">Electronics</label><br>
-
-               <input type="radio" name="tags" id="furniture" value="furniture">
-               <label for="furniture">Furniture</label><br>
-
-              <input type="radio" name="tags" id="appliances" value="appliances">
-              <label for="appliances">Household Appliances</label><br>
-
-               <input type="radio" name="tags" id="tickets" value="tickets">
-               <label for="tickets">Tickets</label><br>
-
-               <input type="radio" name="tags" id="misc" value="misc">
-               <label for="misc">Miscellaneous</label>
-          </div>
-        </div>
-        <ul class="list-group">
-          <li class="list-group-item padbot">
-            <h3>Price your post</h3>
-            <div class="input-group">
-              <span class="input-group-addon">$</span>
-              <input type="text" class="form-control" id="price" aria-label="Amount (to the nearest dollar)" placeholder="9000.01">
-            </div>
-            <input type="checkbox" name="negotiable" id="negotiable" value="negotiable">
-            <label for"negotiable">Negotiable Price</label><br>
-            <input type="checkbox" name="trade" id="trade" value="trade">
-            <label for"trade">Trade me maybe?*</label>
-          </li>
-          <li class="list-group-item">*If willing to trade, elaborate in Description section.</li>
-        </ul>
       </div>
     </div>
 
+  </div>
+  
+</div>
 
-    <div class="col-lg-4">
-      <h3>Contact Info</h3>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="input-group">
-              <span class="input-group-addon" id="sizing-addon1">E-mail:</span>
-              <input type="email" class="form-control" id="email" placeholder="personal@email.com">
-          </div><br>
-          <div class="input-group">
-              <span class="input-group-addon" id="sizing-addon1">Phone:</span>
-              <input type="tel" class="form-control" id="phone" placeholder="(111) 222-3333 (Optional)">
-          </div>
-
-          <h5>Preferred Method(s) of Contact:</h5>
-          <input type="checkbox" name="facebook" value="facebook">
-          <label for="facebook">Facebook</label><br>
-
-          <input type="checkbox" name="call" value="call">
-          <label for="call">Phone Call</label><br>
-
-          <input type="checkbox" name="textmsg" value="textmsg">
-          <label for="textmsg">Text Message</label><br>
-
-          <input type="checkbox" name="e-mail" value="e-mail">
-          <label for="e-mail">E-mail</label>
+  <!--<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <h4>
+        Categories
+      </h4>-->
+      <!--<div class="list-group">
+        <div class="list-group-item" ng-repeat="category in categories">
+          {{category}}
         </div>
+      </div>-->
+
+      <!--<div class"col-lg-1">
+      <div class="list-group">
+        <a href="#" class="list-group-item active">Apartments</a>
+        <a href="#" class="list-group-item">Bikes/Motorcycles/Cars</a>
+        <a href="#" class="list-group-item">Morbi leo risus</a>
+        <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+        <a href="#" class="list-group-item">Vestibulum at eros</a>
       </div>
+      </div>
+
     </div>
   </div>
-</div>
+</div>-->
+
+
+  
+
 
     
 

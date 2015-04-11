@@ -18,6 +18,15 @@ controllers.controller("feed_populate",['$scope', '$http', function($scope, $htt
 
   }
 
+    $(function(){
+
+    $(".dropdown-menu").on('click', 'li a', function(){
+      $(".btn:first-child").text($(this).text());
+      $(".btn:first-child").val($(this).text());
+   });
+
+});
+
 }]);
 
 controllers.controller("sell_controller",['$scope', '$http', function($scope, $http){
