@@ -3,6 +3,7 @@ var ObjectID = require('mongodb').ObjectID;
 module.exports=function(app, mongoose){
   require('../models/items')(mongoose);
   var item = mongoose.model('Item');
+  var image = mongoose.model('Image');
   app.get('/items', function(req, res, next) {
     item.find(function(err, items){
       if(err){ return next(err); }

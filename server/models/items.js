@@ -16,8 +16,8 @@ module.exports=function(mongoose){
   });
   mongoose.model('Item', itemSchema);
 
-  var imageSchema = new mongoose.Schema({
-    data:Buffer
+  var imgSchema = new mongoose.Schema({
+    data: Buffer
   });
-  mongoose.model('Image, imageSchema');
+  mongoose.model('Image', imgSchema);
 };
