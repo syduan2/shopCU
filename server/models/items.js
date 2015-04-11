@@ -13,7 +13,6 @@ module.exports=function(mongoose){
               txtmsg: Boolean,
               email: Boolean },
     images: [String]
-  	}
   });
   mongoose.model('Item', itemSchema);
 
