@@ -3,8 +3,8 @@ app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/home', {
-        templateUrl: 'views/feed.html',
-        controller: 'feed_populate'
+        controller: 'feed_populate',
+        templateUrl: 'views/feed.html'
       }).
       when('/register', {
         templateUrl: 'views/register.html',

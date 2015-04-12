@@ -31,11 +31,11 @@ controllers.controller("feed_populate",['$scope', '$http', function($scope, $htt
 
 controllers.controller("sell_controller",['$scope', '$http', function($scope, $http){
   //var myDropzone = new Dropzone("dropzone", { url: "/image-upload"});
-  var itemID;
+  $scope.itemID='';
   var myDropzone;
   $http.get('/newPost').
   success(function(data, status, headers, config) {
-    itemToken=data;
+    $scope.itemID=data;
   }).
   error(function(data, status, headers, config) {
     console.log("OHNOES");
@@ -51,7 +51,7 @@ controllers.controller("sell_controller",['$scope', '$http', function($scope, $h
       acceptedFiles: "image/*"});
       myDropzone.on("sending", function(file, xhr, formData) {
       // Will send the filesize along with the file as POST data.
-        formData.append("id", itemID);
+        formData.append("id", $scope.itemID);
         console.log(formData);
       });
       $("#submit-form").click(function(){
@@ -68,8 +68,9 @@ controllers.controller("sell_controller",['$scope', '$http', function($scope, $h
                     call: $("call").is(':checked'),
                     txtmsg: $("textmsg").is(':checked'),
                     email: $("e-mail").is(':checked')},
-          id: itemToken
+          id: $scope.itemID
         }
+        $http.post('/submit', outPacket);
         console.log(outPacket);
       });
   });

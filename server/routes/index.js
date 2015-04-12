@@ -2,8 +2,17 @@ var express = require('express')
 var ObjectID = require('mongodb').ObjectID;
 module.exports=function(app, mongoose){
   require('../models/items')(mongoose);
+  var fs = require('fs');
+  var multiparty = require('multiparty');
+  var fs = require('fs');
+  var util = require('util');
+  bodyParser = require('body-parser')
+
+  app.use(bodyParser.json());
+
   var item = mongoose.model('Item');
   var image = mongoose.model('Image');
+
   app.get('/items', function(req, res, next) {
     item.find(function(err, items){
       if(err){ return next(err); }
@@ -26,39 +35,64 @@ module.exports=function(app, mongoose){
                 call: null,
                 txtmsg: null,
                 email: null},
-      images: [null]
+      images: []
     });
     item_instance.save(function(err, instance){
       res.send(instance.id)
     });
   });
-//hi
+
   app.post('/post-image', function(req, res){
-    var fs = require('fs');
-    //var bodyParser = require('body-parser')
-    console.log()
-    function objToString (obj) {
-      var str = '';
-      for (var p in obj) {
-          if (obj.hasOwnProperty(p)) {
-              str += p + '::' + obj[p] + '\n';
-          }
-      }
-      return str;
-    }
-    fs.writeFile("/tmp/test", objToString(req.files), function(err) {
-      if(err) {
-          return console.log(err);
-      }
+    var form = new multiparty.Form();
 
-      console.log("The file was saved!");
+    form.parse(req, function(err, fields, file){
+        if (err) {
+            res.writeHead(400, {'content-type': 'text/plain'});
+            res.end("invalid request: " + err.message);
+            return;
+        }
+        var image_instance = new image({
+          //STORE IMAGE
+        })
+        image_instance.data = fs.readFileSync(file.file[0].path);
+        image_instance.save(function(err, instance){
+          item.find({ _id: fields.id}, function(err, item_instances){
+            item_instances[0].images.push(instance.id);
+            item_instances[0].save();
+          });
+          res.send("success!");
+        });
     });
-    var image_instance = new image({
-      //STORE IMAGE
-    })
-    res.send("success!");
-    //RETURN ID AND STICK IT INTO THE ImAGES ARRAY IN OUR POST INSTANCE
   });
+  app.post('/submit', function(req, res){
+    console.log(req.body);
+    var form = new multiparty.Form();
+    form.parse(req, function(err, fields, file){
+      //console.log(fields);
 
+      item.find({ _id: mongoose.Types.ObjectId(req.body.id)}, function(err, instances){
+        instances[0].title = req.body.title;
+        instances[0].description = req.body.description;
+        instances[0].price = req.body.price;
+        instances[0].trade = req.body.trade;
+        instances[0].negotiable = req.body.negotiable;
+        instances[0].email = req.body.email;
+        instances[0].phone = req.body.phone;
+        instances[0].method = {facebook: req.body.methods.facebook,
+          call: req.body.methods.call,
+          txtmsg: req.body.methods.txtmsg,
+          email: req.body.methods.email};
+        instances[0].save();
+      });
+
+    });
+    res.send("success!");
+  });
+  app.get('/images/:id', function(req,res){
+    image.find({ _id: mongoose.Types.ObjectId(req.params.id)}, function(err, instance){
+      res.send(instance[0].data);
+    });
+
+  });
 
 };
