@@ -32,11 +32,21 @@ module.exports=function(app, mongoose){
       res.send(instance.id)
     });
   });
-
+//hi
   app.post('/post-image', function(req, res){
     var fs = require('fs');
     //var bodyParser = require('body-parser')
-    fs.writeFile("/tmp/test", JSON.stringify(req), function(err) {
+    console.log()
+    function objToString (obj) {
+      var str = '';
+      for (var p in obj) {
+          if (obj.hasOwnProperty(p)) {
+              str += p + '::' + obj[p] + '\n';
+          }
+      }
+      return str;
+    }
+    fs.writeFile("/tmp/test", objToString(req.files), function(err) {
       if(err) {
           return console.log(err);
       }
