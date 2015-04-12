@@ -71,7 +71,7 @@ controllers.controller("sell_controller",['$scope', '$http', function($scope, $h
           id: $scope.itemID
         }
         $http.post('/submit', outPacket);
-        console.log(outPacket);
+        window.location.href = '/#home';
       });
   });
 
