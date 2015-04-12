@@ -88,7 +88,7 @@ module.exports=function(app, mongoose){
     });
     res.send("success!");
   });
-  app.get('/images/:id', function(req,res){
+  app.get('/img/:id', function(req,res){
     image.find({ _id: mongoose.Types.ObjectId(req.params.id)}, function(err, instance){
       res.send(instance[0].data);
     });
