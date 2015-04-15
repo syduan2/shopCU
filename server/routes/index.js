@@ -100,7 +100,10 @@ module.exports=function(app, mongoose){
     image.find({ _id: mongoose.Types.ObjectId(req.params.id)}, function(err, instance){
       res.send(instance[0].data);
     });
-
   });
-
+  app.get('/post/:id', function(req,res){
+    item.find({ _id: mongoose.Types.ObjectId(req.params.id)}, function(err, instance){
+      res.send(instance[0]);
+    })
+  });
 };

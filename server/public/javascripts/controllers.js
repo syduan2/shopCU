@@ -75,8 +75,18 @@ controllers.controller("sell_controller",['$scope', '$http', function($scope, $h
       });
   });
 }]);
-controllers.controller('view_controller', ['$scope', '$routeParams',
-  function($scope, $routeParams){
+controllers.controller('view_controller', ['$scope', '$http', '$routeParams',
+  function($scope, $http, $routeParams){
     console.log($routeParams.postID);
+    $scope.item={}
+    $http.get('/post/'+$routeParams.postID).
+    success(function(data, status, headers, config) {
+      $scope.item=angular.fromJson(data);
+      $scope.images = $scope.item.images;
+      console.log($scope.item.methods.facebook)
+    }).
+    error(function(data, status, headers, config) {
+      console.log("OHNOES")
+    });
   }
 ]);

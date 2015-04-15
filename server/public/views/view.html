@@ -28,7 +28,7 @@
             <div class="item">
               <img src="img_chania2.jpg" alt="Chania" width="460" height="345">
             </div>
-          
+
             <div class="item">
               <img src="img_flower.jpg" alt="Flower" width="460" height="345">
             </div>
@@ -47,25 +47,24 @@
             <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
           </a>
-        </div>  
+        </div>
       </div>
 
       <div class="col-lg-1"></div>
 
       <div class="col-lg-7">
-        <h2>My Freaking Fresh Air Guitar REALLY REALLY REALLY REALLY REALLY REALLY
+        <h2>{{item.title}}
+          REALLY REALLY REALLY REALLY REALLY REALLY
           REALLREALRLAWRLAWRLWALRAWL LONG</h2>
         <div class="panel panel-default setheight">
           <div class="panel-body">
-            It's supa fresh<br>
-            Hella fresh<br>
-            Doesn't come with case
+            {{item.description}}
           </div>
         </div>
       </div>
 
       <div class="col-lg-6">
-        <h3>$321.23</h3>
+        <h3>${{item.price}}</h3>
         <h5><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Negotiable Price</h5>
         <h5><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Willing to Trade</h5>
       </div>
@@ -76,13 +75,13 @@
         <div class="panel panel-primary">
           <div class="panel-heading">David Swagger Chen</div>
           <div class="panel-body">
-            <h5>Email: swagger1@illinois.edu</h5>
-            <h5>Phone: 1-800-HEY-QURL</h5>
+            <h5>Email: {{item.email}}</h5>
+            <h5>Phone: {{item.phone}}</h5>
             <h5>Preferred Method(s) of Contact:</h5>
-            <h5><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Facebook</h5>
-            <h5><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Phone Call</h5>
-            <h5><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Text</h5>
-            <h5><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>E-mail</h5>
+            <h5><span class="glyphicon glyphicon-ok" aria-hidden="{{item.methods.facebook}}"></span>Facebook</h5>
+            <h5><span class="glyphicon glyphicon-ok" aria-hidden="{{item.methods.call}}"></span>Phone Call</h5>
+            <h5><span class="glyphicon glyphicon-ok" aria-hidden="{{item.methods.txtmsg}}"></span>Text</h5>
+            <h5><span class="glyphicon glyphicon-ok" aria-hidden="{{item.methods.email}}"></span>E-mail</h5>
           </div>
         </div>
       </div>
@@ -94,6 +93,3 @@
       </div>
 
     </div>
-
-    
-
