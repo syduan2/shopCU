@@ -18,8 +18,9 @@ module.exports=function(app, mongoose){
       if(err){ return next(err); }
       items_out = [];
       for(var i=0; i<items.length && i<25; i++){
+
         if(items[i].title != null && items[i].images.length!=0){
-          items_out.concat(items[i]);
+          items_out.push(items[i]);
         }
       }
       res.json(items_out);
