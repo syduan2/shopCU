@@ -14,6 +14,10 @@ app.config(['$routeProvider',
         templateUrl: 'views/post.html',
         controller: 'sell_controller'
       }).
+      when('/posts/:postID', {
+        templateUrl: 'views/view.html',
+        controller: 'view_controller'
+      }).
       otherwise({
         redirectTo: '/home'
       });

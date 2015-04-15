@@ -89,6 +89,7 @@ module.exports=function(app, mongoose){
           call: req.body.methods.call,
           txtmsg: req.body.methods.txtmsg,
           email: req.body.methods.email};
+        instances[0].id = req.body.id;
         instances[0].save();
       });
 

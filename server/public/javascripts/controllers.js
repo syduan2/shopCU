@@ -74,6 +74,9 @@ controllers.controller("sell_controller",['$scope', '$http', function($scope, $h
         window.location.href = '/';
       });
   });
-
-
 }]);
+controllers.controller('view_controller', ['$scope', '$routeParams',
+  function($scope, $routeParams){
+    console.log($routeParams.postID);
+  }
+]);
