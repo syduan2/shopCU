@@ -74,6 +74,12 @@ controllers.controller("sell_controller",['$scope', '$http', function($scope, $h
         window.location.href = '/';
       });
   });
+<<<<<<< Updated upstream
+=======
+
+  
+
+>>>>>>> Stashed changes
 }]);
 controllers.controller('view_controller', ['$scope', '$routeParams',
   function($scope, $routeParams){
