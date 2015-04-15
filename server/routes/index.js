@@ -17,7 +17,7 @@ module.exports=function(app, mongoose){
     item.find(function(err, items){
       if(err){ return next(err); }
       items_out = [];
-      for(var i=0; i<items.length; i++){
+      for(var i=0; i<items.length && i<25; i++){
         if(items[i].title != null && items[i].images.length!=0){
           items_out.concat(items[i]);
         }
