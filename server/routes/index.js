@@ -16,7 +16,13 @@ module.exports=function(app, mongoose){
   app.get('/items', function(req, res, next) {
     item.find(function(err, items){
       if(err){ return next(err); }
-      res.json(items);
+      items_out = [];
+      for(var i=0; i<items.length; i++){
+        if(items[i].title != null && items[i].images.length!=0){
+          items_out.concat(items[i]);
+        }
+      }
+      res.json(items_out);
     });
   });
 
