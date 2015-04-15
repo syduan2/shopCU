@@ -24,3 +24,11 @@ textarea {
     height: 300px;
     
   }
+
+  .padleft {
+    padding-left: 50px;
+  }
+
+  .padrightsoft {
+    padding-right: 5px;
+  }
