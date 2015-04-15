@@ -34,10 +34,12 @@
     </div>
     <div class= "row" ng-repeat="item in items">
       <div class="thumbnail">
-      <img src="img/{{item.images[0]}}">
-        <div class="caption">
-          {{item.title}}
-        </div>
+      <a href="#/posts/{{item._id}}">
+        <img src="img/{{item.images[0]}}">
+      </a>
+      <div class="caption">
+        {{item.title}}
+      </div>
       </div>
     </div>
 
