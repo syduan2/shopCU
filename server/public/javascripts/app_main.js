@@ -1,4 +1,4 @@
-var app=angular.module("shopcu_main", ['ngRoute', 'controllers']);
+var app=angular.module("shopcu_main", ['ngRoute', 'controllers', 'ui.bootstrap']);
 app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
