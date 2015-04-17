@@ -60,16 +60,17 @@ controllers.controller("sell_controller",['$scope', '$http', function($scope, $h
           description: $("#description").val(),
           tag: $('input[name="tags"]:checked').val(),
           price: $("#price").val(),
-          negotiable: $("#negotiable").is(':checked'),
-          trade: $("trade").is(':checked'),
+          negotiable: $("#negotiable").prop('checked'),
+          trade: $("#trade").prop('checked'),
           email: $("#email").val(),
           phone: $("#phone").val(),
-          methods: {facebook: $("#facebook").is(':checked'),
-                    call: $("call").is(':checked'),
-                    txtmsg: $("textmsg").is(':checked'),
-                    email: $("e-mail").is(':checked')},
+          methods: {facebook: $("#facebook").prop('checked'),
+                    call: $("#call").prop('checked'),
+                    txtmsg: $("#textmsg").prop('checked'),
+                    email: $("#e-mail").prop('checked')},
           id: $scope.itemID
         }
+        //console.log(outPacket.methods);
         $http.post('/submit', outPacket);
         window.location.href = '/';
       });
@@ -77,13 +78,18 @@ controllers.controller("sell_controller",['$scope', '$http', function($scope, $h
 }]);
 controllers.controller('view_controller', ['$scope', '$http', '$routeParams',
   function($scope, $http, $routeParams){
-    console.log($routeParams.postID);
     $scope.item={}
     $http.get('/post/'+$routeParams.postID).
     success(function(data, status, headers, config) {
       $scope.item=angular.fromJson(data);
+      console.log($scope.item);
       $scope.images = $scope.item.images;
-      console.log($scope.item.methods.facebook)
+      if(!$scope.item.methods.facebook) $("#facebook").attr('class', 'glyphicon glyphicon-remove');
+      if(!$scope.item.methods.txtmsg)  $("#txtmsg").attr('class', 'glyphicon glyphicon-remove');
+      if(!$scope.item.methods.call)  $("#call").attr('class', 'glyphicon glyphicon-remove');
+      if(!$scope.item.methods.email) $("#email").attr('class', 'glyphicon glyphicon-remove');
+      if(!$scope.item.trade) $("#trade").attr('class', 'glyphicon glyphicon-remove');
+      if(!$scope.item.negotiable) $("#negotiable").attr('class', 'glyphicon glyphicon-remove');
     }).
     error(function(data, status, headers, config) {
       console.log("OHNOES")

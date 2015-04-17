@@ -34,8 +34,8 @@
 
       <div class="col-lg-6">
         <h3>${{item.price}}</h3>
-        <h5><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Negotiable Price</h5>
-        <h5><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Willing to Trade</h5>
+        <h5><span id = "negotiable" class="glyphicon glyphicon-remove"></span>Negotiable Price</h5>
+        <h5><span id = "trade" class="glyphicon glyphicon-ok"></span>Willing to Trade</h5>
       </div>
 
       <div class="col-lg-3"></div>
@@ -47,10 +47,10 @@
             <h5>Email: {{item.email}}</h5>
             <h5>Phone: {{item.phone}}</h5>
             <h5>Preferred Method(s) of Contact:</h5>
-            <h5><span class="glyphicon glyphicon-ok" aria-hidden="{{item.methods.facebook}}"></span>Facebook</h5>
-            <h5><span class="glyphicon glyphicon-ok" aria-hidden="{{item.methods.call}}"></span>Phone Call</h5>
-            <h5><span class="glyphicon glyphicon-ok" aria-hidden="{{item.methods.txtmsg}}"></span>Text</h5>
-            <h5><span class="glyphicon glyphicon-ok" aria-hidden="{{item.methods.email}}"></span>E-mail</h5>
+            <h5><span id = "facebook" class="glyphicon glyphicon-ok"></span>Facebook</h5>
+            <h5><span id = "call" class="glyphicon glyphicon-ok"></span>Phone Call</h5>
+            <h5><span id = "txtmsg" class="glyphicon glyphicon-ok"></span>Text</h5>
+            <h5><span id = "email" class="glyphicon glyphicon-ok"></span>E-mail</h5>
 
           </div>
         </div>

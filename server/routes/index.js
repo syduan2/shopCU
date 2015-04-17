@@ -72,10 +72,9 @@ module.exports=function(app, mongoose){
     });
   });
   app.post('/submit', function(req, res){
-    console.log(req.body);
     var form = new multiparty.Form();
     form.parse(req, function(err, fields, file){
-      //console.log(fields);
+      //console.log(req.body.methods);
 
       item.find({ _id: mongoose.Types.ObjectId(req.body.id)}, function(err, instances){
         instances[0].title = req.body.title;
@@ -85,7 +84,7 @@ module.exports=function(app, mongoose){
         instances[0].negotiable = req.body.negotiable;
         instances[0].email = req.body.email;
         instances[0].phone = req.body.phone;
-        instances[0].method = {facebook: req.body.methods.facebook,
+        instances[0].methods = {facebook: req.body.methods.facebook,
           call: req.body.methods.call,
           txtmsg: req.body.methods.txtmsg,
           email: req.body.methods.email};
