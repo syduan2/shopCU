@@ -32,10 +32,10 @@
 
       <div class="container">
         <div class="col-lg-6">
-          <h3>$321.23</h3>
+          <h3>${{item.price}}</h3>
           <h4>Highest Bid: $321.22</h4>
-          <h5><span class="glyphicon glyphicon-remove padrightsoft" aria-hidden="true"></span>Negotiable Price</h5>
-          <h5><span class="glyphicon glyphicon-ok padrightsoft" aria-hidden="true"></span>Willing to Trade</h5>
+          <h5><span id="negotiable" class="glyphicon glyphicon-remove padrightsoft"></span>Negotiable Price</h5>
+          <h5><span id= "trade" class="glyphicon glyphicon-ok padrightsoft" ></span>Willing to Trade</h5>
         </div>
 
         <div class="col-lg-3"></div>
@@ -44,15 +44,15 @@
           <div class="panel panel-primary">
             <div class="panel-heading">David Swagger Chen</div>
             <div class="panel-body">
-              <h5>Email: swagger1@illinois.edu</h5>
-              <h5>Phone: 1-800-HEY-QURL</h5>
+              <h5>Email: {{item.email}}</h5>
+              <h5>Phone: {{item.phone}}</h5>
               <h5>Preferred Method(s) of Contact:</h5>
               <table>
                 <tr>
-              <td><h5><span class="glyphicon glyphicon-ok padrightsoft" aria-hidden="true"></span>Facebook</h5>
-              <h5><span class="glyphicon glyphicon-ok padrightsoft" aria-hidden="true"></span>Phone Call</h5></td>
-              <td class="padleft"><h5><span class="glyphicon glyphicon-ok padrightsoft" aria-hidden="true"></span>Text</h5>
-              <h5><span class="glyphicon glyphicon-ok padrightsoft" aria-hidden="true"></span>E-mail</h5></td>
+              <td><h5><span id="facebook" class="glyphicon glyphicon-ok padrightsoft" ></span>Facebook</h5>
+              <h5><span id= "phone" class="glyphicon glyphicon-ok padrightsoft" ></span>Phone Call</h5></td>
+              <td class="padleft"><h5><span id="txtmsg" class="glyphicon glyphicon-ok padrightsoft"></span>Text</h5>
+              <h5><span id="email" class="glyphicon glyphicon-ok padrightsoft" ></span>E-mail</h5></td>
             </tr>
             </table>
             </div>
