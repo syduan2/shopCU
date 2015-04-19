@@ -53,6 +53,25 @@
               </form>
               <div class="btn-group" role="group" aria-label="...">
                 <button type="submit" class="btn btn-lg btn-primary">Sign up for shopCU</button>
+                  
+                  
+                  <input class="form-control" id="nameInput" ng-model="nameIn" placeholder="name" autofocus>
+                    <br>
+                  <input class="form-control" id="emailInput" ng-model="emailIn" placeholder="email">
+                    <br>
+                  <input class="form-control" id="passwordInput" ng-model="passwordIn" placeholder="password">
+                  <a ng-click = "login(nameIn, emailIn, passwordIn)", class="btn btn-lg btn-primary">Login User</a>
+                  
+                  
+                  <input class="form-control" id="nameIN" ng-model="nameIN" placeholder="name" autofocus>
+                    <br>
+                  <input class="form-control" id="emailIN" ng-model="emailIN" placeholder="email">
+                    <br>
+                  <input class="form-control" id="passwordIN" ng-model="passwordIN" placeholder="password">
+                  <a ng-click = "add(nameIN, emailIN, passwordIN)", class="btn btn-lg btn-primary">Add User</a>
+                  
+                  <h1>Hello, {{usernameDisplay}}</h1>
+                  
               </div>
             </div>
           </div>
