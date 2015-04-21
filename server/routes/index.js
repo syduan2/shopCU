@@ -191,19 +191,19 @@ app.post('/auth/register', auth.register);*/
 
       //item.find({ _id: mongoose.Types.ObjectId(req.body.id)}, function(err, instances){
       item.findOne({ _id: req.body.id}, function(err, instances){
-        instances[0].title = req.body.title;
-        instances[0].description = req.body.description;
-        instances[0].price = req.body.price;
-        instances[0].trade = req.body.trade;
-        instances[0].negotiable = req.body.negotiable;
-        instances[0].email = req.body.email;
-        instances[0].phone = req.body.phone;
-        instances[0].methods = {facebook: req.body.methods.facebook,
+        instances.title = req.body.title;
+        instances.description = req.body.description;
+        instances.price = req.body.price;
+        instances.trade = req.body.trade;
+        instances.negotiable = req.body.negotiable;
+        instances.email = req.body.email;
+        instances.phone = req.body.phone;
+        instances.methods = {facebook: req.body.methods.facebook,
           call: req.body.methods.call,
           txtmsg: req.body.methods.txtmsg,
           email: req.body.methods.email};
-        instances[0].id = req.body.id;
-        instances[0].save();
+        instances.id = req.body.id;
+        instances.save();
       });
 
     });
@@ -213,13 +213,13 @@ app.post('/auth/register', auth.register);*/
     //image.find({ _id: mongoose.Types.ObjectId(req.params.id)}, function(err, instance){
     image.findOne({ _id: req.params.id}, function(err, instance){
       
-      res.send(instance[0].data);
+      res.send(instance.data);
     });
   });
   app.get('/post/:id', function(req,res){
     //item.find({ _id: mongoose.Types.ObjectId(req.params.id)}, function(err, instance){
     item.findOne({ _id: req.params.id}, function(err, instance){
-      res.send(instance[0]);
+      res.send(instance);
     })
   });
     
