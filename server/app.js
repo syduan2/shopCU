@@ -20,7 +20,7 @@ app.get('/', function (req, res) {
   res.sendfile('/public/index.html')
 })
 
-//hi
+
 
 //var server = app.listen(80, '172.31.36.56', function () {
 var server = app.listen(80, 'localhost', function () {
