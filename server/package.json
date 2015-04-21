@@ -13,6 +13,7 @@
     "connect-flash": "^0.1.1",
     "express": "^4.12.3",
     "express-session": "^1.11.1",
+    "mongodb": "^2.0.27",
     "mongoose": "^4.0.1",
     "multiparty": "^4.1.1",
     "passport": "^0.2.1",
