@@ -3,7 +3,7 @@ textarea {
 	height: 100px;
 	margin-top: 0px;
 }
-
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
   .carousel-inner > .item > img,
   .carousel-inner > .item > a > img {
@@ -22,5 +22,23 @@ textarea {
   }
   .setheight {
     height: 300px;
-    
+
   }
+
+  .padleft {
+    padding-left: 50px;
+  }
+
+  .padrightsoft {
+    padding-right: 5px;
+  }
+
+  .commentspad {
+    padding-top: 15px;
+  }
+
+  .titlepad {
+    padding-bottom: 5%;
+    padding-top: 5%;
+  }
+

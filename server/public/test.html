@@ -17,8 +17,9 @@
 
 </head>
 
-<body>
-  <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+<link href="css/account.css" rel="stylesheet">
+
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
         <a class="navbar-brand" href="#/home">shopCU</a>
@@ -38,126 +39,76 @@
       </div>
     </div>
   </nav>
-  <div>
-
-
-<link href="css/post.css" rel="stylesheet">
-<div class="container">
+  
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-12"><h2>What are you selling?</h2></div>
-     
-          <div class="col-lg-10 padtop">
-            <div class="form-group form-group-lg">
-              <input type="text" class="form-control" id="title" placeholder="Title of post (ex. Air Guitar Fresh Condition)">
-            </div>
-          </div>
-
-        <div class="col-lg-2">
-          <div class="btn" aria-label="...">
-             <button id="submit-form" type="submit" class="btn btn-lg btn-primary">Save</button>
-          </div>
-        </div>
-
+      <div class="col-lg-2">
       </div>
 
-    <div class="row">
-      <div class="col-lg-4">
-        <h3>Description</h3>
-        <textarea class="req" tabindex="1" rows="10" id="description" name="PostingBody" placeholder="Ex. Authentic Air (Slightly polluted)"></textarea>
-
-        <h3>Upload Images</h3>
-        <div class="panel panel-default">
-          <form action="demo_form.asp">
-            <h4 class="padleft">Select images:</h4> <input class="padleft" type="file" name="img" multiple>
-          </form>
-          <ul class="list-group"><li class="list-group-item">You can select multiple files with CMD on Mac or CTRL on Windows</li></ul>
-        </div>
-      </div>
-
-      <div class="col-lg-4">
-        <h3>Tag your post</h3>
+      <div class="col-lg-2">
         <div class="panel panel-default">
           <div class="panel-body">
-            <div class="input-group">
-              <input type="radio" name="tags" id="apartments" value="apartments">
-               <label for="apartments">Apartments</label><br>
-
-               <input type="radio" name="tags" id="bikes" value="bikes">
-               <label for="bikes">Bikes/Motorcycles/Cars</label><br>
-
-               <input type="radio" name="tags" id="clothing" value="clothing">
-               <label for="clothing">Clothing</label><br>
-
-               <input type="radio" name="tags" id="electronics" value="electronics">
-               <label for="electronics">Electronics</label><br>
-
-               <input type="radio" name="tags" id="furniture" value="furniture">
-               <label for="furniture">Furniture</label><br>
-
-              <input type="radio" name="tags" id="appliances" value="appliances">
-              <label for="appliances">Household Appliances</label><br>
-
-               <input type="radio" name="tags" id="tickets" value="tickets">
-               <label for="tickets">Tickets</label><br>
-
-               <input type="radio" name="tags" id="misc" value="misc">
-               <label for="misc">Miscellaneous</label>
+            <h3>First Last</h3>
           </div>
-        </div>
-        <ul class="list-group">
-          <li class="list-group-item padbot">
-            <h3>Price your post</h3>
-            <div class="input-group">
-              <span class="input-group-addon">$</span>
-              <input type="text" class="form-control" id="price" aria-label="Amount (to the nearest dollar)" placeholder="9000.01">
+          <ul class="list-group">
+            <li class="list-group-item">
+            <div class="panel-body">
+              Contact Info?<br> 
+              Random stuff<br>
+              idk what to put here
             </div>
-            <input type="checkbox" name="negotiable" id="negotiable" value="negotiable">
-            <label for"negotiable">Negotiable Price</label><br>
-            <input type="checkbox" name="trade" id="trade" value="trade">
-            <label for"trade">Trade me maybe?*</label>
           </li>
-          <li class="list-group-item">*If willing to trade, elaborate in Description section.</li>
-        </ul>
-      </div>
-    </div>
-
-
-    <div class="col-lg-4">
-      <h3>Contact Info</h3>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="input-group">
-              <span class="input-group-addon" id="sizing-addon1">E-mail:</span>
-              <input type="email" class="form-control" id="email" placeholder="personal@email.com">
-          </div><br>
-          <div class="input-group">
-              <span class="input-group-addon" id="sizing-addon1">Phone:</span>
-              <input type="tel" class="form-control" id="phone" placeholder="(111) 222-3333 (Optional)">
-          </div>
-
-          <h5>Preferred Method(s) of Contact:</h5>
-          <input type="checkbox" name="facebook" value="facebook">
-          <label for="facebook">Facebook</label><br>
-
-          <input type="checkbox" name="call" value="call">
-          <label for="call">Phone Call</label><br>
-
-          <input type="checkbox" name="textmsg" value="textmsg">
-          <label for="textmsg">Text Message</label><br>
-
-          <input type="checkbox" name="e-mail" value="e-mail">
-          <label for="e-mail">E-mail</label>
+          </ul>
         </div>
       </div>
+
+      <div class="col-lg-4">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h3>Account</h3>
+            <h6>Manage account information here</h6><br>
+          </div>
+          <ul class="list-group">
+            <li class="list-group-item"><h5>Email</h5>
+              <div class="form-group">
+                <label for="inputEmail" class="sr-only">Email</label>
+                <input type="text" id="text" class="form-control" placeholder="someperson@email.com" required>
+
+                <div class="spacing"></div>
+
+                <label for="inputEmail" class="sr-only">Email</label>
+                <input type="text" id="text" class="form-control" placeholder="Confirm Email" required>
+              </div>
+            </li>
+
+            <li class="list-group-item"><h5>Password</h5>
+              <div class="form-group">
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" id="text" class="form-control" placeholder="New Password" required>
+
+                <div class="spacing"></div>
+
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" id="text" class="form-control" placeholder="Confirm Password" required>
+              </div>
+            </li>
+
+            <li class="list-group-item"><h5>Notifications</h5>
+              <h6><input type="checkbox" id="follow" value="follow">
+              <label for="follow">Notify through email on items being followed</label></h6>
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </li>
+
+          </ul>
+          
+        
+      </div>
     </div>
-  </div>
-</div>
+  </div> 
 
-    
 
-  </div>
+      
 
- 
 
 
 

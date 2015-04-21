@@ -1,10 +1,10 @@
-var app=angular.module("shopcu_main", ['ngRoute', 'controllers']);
+var app=angular.module("shopcu_main", ['ngRoute', 'controllers', 'ui.bootstrap']);
 app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/home', {
-        templateUrl: 'views/feed.html',
-        controller: 'feed_populate'
+        controller: 'feed_populate',
+        templateUrl: 'views/feed.html'
       }).
       when('/register', {
         templateUrl: 'views/register.html',
@@ -13,6 +13,10 @@ app.config(['$routeProvider',
       when('/sell', {
         templateUrl: 'views/post.html',
         controller: 'sell_controller'
+      }).
+      when('/posts/:postID', {
+        templateUrl: 'views/view.html',
+        controller: 'view_controller'
       }).
       otherwise({
         redirectTo: '/home'
