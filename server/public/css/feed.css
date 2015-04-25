@@ -1,0 +1,28 @@
+.color {
+  background-color: #FFFFFF;
+}
+
+.well {
+	background: #FFFFFF;
+}
+
+.padbot {
+	padding-bottom: 25px;
+}
+
+.price {
+	padding-bottom: 5px;
+}
+
+.padright {
+	padding-right: 100px;
+}
+
+
+body {
+	background-color: #F5F5F5;
+}
+
+label {
+	font-weight: normal;
+}
