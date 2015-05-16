@@ -99,7 +99,7 @@ controllers.controller('view_controller', ['$scope', '$http', '$routeParams',
 controllers.controller("register_controller",['$scope', '$http', '$window', function($scope, $http, $window){
     if ($window.sessionStorage.user)$scope.usernameDisplay = $window.sessionStorage.user;
     else $scope.usernameDisplay = 'New Guest';
-    $scope.login = function(name,email,password) {
+    $scope.login = function(email,password) {
         //console.log("username=" + name + "&email="+email);
      /* var dataObj = {
 				username : name,
@@ -112,7 +112,7 @@ controllers.controller("register_controller",['$scope', '$http', '$window', func
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 })*/
         var outPacket={
-                name : name,
+                email : email,
 				email : email,
                 password : password
         };
@@ -123,18 +123,17 @@ controllers.controller("register_controller",['$scope', '$http', '$window', func
         alert(done.message);
     });
   }
-    
+
     $scope.add = function(name,email,password) {
         var outPacket={
                 name : name,
-				email : email,
+				        email : email,
                 password : password
         };
         $http.post('/users', outPacket).success(function(data){
-        alert(data.message);
+          alert(data.message);
     }).error(function(data){
         alert(data.message);
     });
   }
 }]);
-
