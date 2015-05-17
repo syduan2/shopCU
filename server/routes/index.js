@@ -32,7 +32,7 @@ module.exports=function(app, mongoose){
 
 
 passport.use(new LocalStrategy({
-    usernameField: 'name',
+    usernameField: 'email',
     passwordField: 'password'
   },
   function(username, password, done) {
