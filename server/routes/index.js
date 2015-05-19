@@ -139,6 +139,22 @@ app.post('/auth/register', auth.register);*/
       res.json(items_out);
     });
   });
+    
+  app.get('/users', function(req, res, next) {
+    User.find(function(err, users){
+      if(err){ return next(err); }
+      Users_out = [];
+        console
+      for(var i=0; i<users.length && i<25; i++){
+
+        if(users[i].email != null){
+          Users_out.push(users[i]);
+        }
+      }
+      res.json(Users_out);
+    });
+  });
+
 
   app.get('/newPost', function (req, res) {
 
