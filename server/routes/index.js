@@ -37,15 +37,15 @@ passport.use(new LocalStrategy({
   },
   function(username, password, done) {
       console.log("-----");
-    User.findOne({ name: username }, function (err, user) {
+    User.findOne({ email: username }, function (err, user) {
       if (err) { console.log("err"); return done(err); }
-      if (!user) { console.log("no user");
-        return done(null, false, { message: 'Incorrect username.' });
+      if (!user) { console.log("No user with this email");
+        return done(null, false, { message: 'Incorrect email.' });
       }
       //if (!user.validPassword(password)) { console.log("wrong password");
       //if (user.password != password) { console.log("wrong password");
       var bcrypt = require('bcrypt');
-      if (!bcrypt.compareSync(password, user.password)) { console.log("wrong password");
+      if (!bcrypt.compareSync(password, user.password)) { console.log("Wrong password");
         return done(null, false, { message: 'Incorrect password.' });
       }
         console.log("good");
@@ -247,6 +247,17 @@ app.post('/auth/register', auth.register);*/
           console.log("hash: "+hash);
           req.body.password = hash;
       }
+      if(!req.body.email){
+            res.status(500).json({message: 'Email field is required',"data":[]});
+            return;
+        }
+        else{
+            var emailFormat = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+            if (req.body.email.search(emailFormat) == -1) {
+                res.status(500).json({message: 'Email address is not valid',"data":[]});
+                return;
+            }
+        }
       User.create(req.body,function(err,post){
           //console.log("------------------------------------------------------------");
           //console.log(req.body);
@@ -281,6 +292,13 @@ app.post('/auth/register', auth.register);*/
         if(!post.email){
             res.status(500).json({message: 'Email field is required',"data":[]});
             return;
+        }
+        else{
+            var emailFormat = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+            if (post.email.search(emailFormat) == -1) {
+                res.status(500).json({message: 'Email address is not valid',"data":[]});
+                return;
+            }
         }
         if(!post.password){
             res.status(500).json({message: 'Password field is required',"data":[]});
