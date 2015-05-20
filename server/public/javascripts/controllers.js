@@ -139,12 +139,45 @@ controllers.controller("register_controller",['$scope', '$http', '$window', func
 }]);
 
 controllers.controller("management_controller",['$scope', '$http', '$window', function($scope, $http, $window){
+  $scope.users = [];
+  var getUsers = function(){
+      $http.get('/users').
+        success(function(data) {
+          $scope.users=data;
+          console.log($scope.users);
+        }).
+        error(function(data, status, headers, config) {
+          console.log("OHNOES")
+      });
+  }
+  getUsers();
+  $scope.items = [];
+  var getItems = function(){
+      $http.get('/items').
+        success(function(data) {
+          $scope.items=data;
+          console.log($scope.users);
+        }).
+        error(function(data, status, headers, config) {
+          console.log("OHNOES")
+      });
+  }
+    
   $scope.clearUsers = function() {
         $http.delete('/users').success(function(done){
         alert(done.message);
     }).error(function(done){
         alert(done.message);
     });
+    getUsers();
+  }
+  $scope.deleteUser = function(id) {
+        $http.delete('/users/'+id).success(function(done){
+        alert(done.message);
+    }).error(function(done){
+        alert(done.message);
+    });
+    getUsers();
   }
   $scope.clearItems = function() {
         $http.delete('/items').success(function(done){
@@ -152,24 +185,14 @@ controllers.controller("management_controller",['$scope', '$http', '$window', fu
     }).error(function(done){
         alert(done.message);
     });
+    getItems();
   }
-  $scope.users = [];
-  $http.get('/users').
-    success(function(data) {
-      $scope.users=data;
-      console.log($scope.users);
-    }).
-    error(function(data, status, headers, config) {
-      console.log("OHNOES")
-  });
-  $scope.items = [];
-  $http.get('/items').
-    success(function(data) {
-      $scope.items=data;
-      console.log($scope.users);
-    }).
-    error(function(data, status, headers, config) {
-      console.log("OHNOES")
-  });
-
+  $scope.deleteItem = function(id) {
+        $http.delete('/items/'+id).success(function(done){
+        alert(done.message);
+    }).error(function(done){
+        alert(done.message);
+    });
+    getItems();
+  }
 }]);

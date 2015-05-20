@@ -258,6 +258,36 @@ app.post('/auth/register', auth.register);*/
         return res.status(200).json({message: 'Items Cleared',"data":[]});
     });
   });
+  app.delete('/users/:id',function(req,res,next){
+      User.findOneAndRemove({_id:req.params.id},req.body,function(err,del){
+        if(err) {
+            if (err.path == '_id') {
+                var msg = '{"message": "User Not Found","data":[]}';
+                msg = JSON.parse(msg);
+                res.statusCode = 404;
+                res.json(msg);
+                return;
+            }
+            var msg = '{"message": "Server Error",'+'"data":'+JSON.stringify(del)+'}';
+            msg = JSON.parse(msg);
+            res.statusCode = 500 ;
+            res.json(msg);
+            return next(err);
+        }
+        if(JSON.stringify(del) == 'null') {
+            var msg = '{"message": "User Not Found","data":[]}';
+            msg = JSON.parse(msg);
+            res.statusCode = 404;
+            res.json(msg);
+            return;
+        }
+        var msg = '{"message": "User Removed",'+'"data":'+JSON.stringify(del)+'}';
+        msg = JSON.parse(msg);
+        res.statusCode = 200;
+        res.json(msg);
+        return;
+      });
+  });
     
   app.post('/users',function(req,res,next){
       //console.log(req);
