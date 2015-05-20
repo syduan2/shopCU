@@ -18,6 +18,10 @@ app.config(['$routeProvider',
         templateUrl: 'views/view.html',
         controller: 'view_controller'
       }).
+      when('/management', {
+        templateUrl: 'views/management.html',
+        controller: 'management_controller'
+      }).
       otherwise({
         redirectTo: '/home'
       });

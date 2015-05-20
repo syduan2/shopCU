@@ -137,3 +137,39 @@ controllers.controller("register_controller",['$scope', '$http', '$window', func
     });
   }
 }]);
+
+controllers.controller("management_controller",['$scope', '$http', '$window', function($scope, $http, $window){
+  $scope.clearUsers = function() {
+        $http.delete('/users').success(function(done){
+        alert(done.message);
+    }).error(function(done){
+        alert(done.message);
+    });
+  }
+  $scope.clearItems = function() {
+        $http.delete('/items').success(function(done){
+        alert(done.message);
+    }).error(function(done){
+        alert(done.message);
+    });
+  }
+  $scope.users = [];
+  $http.get('/users').
+    success(function(data) {
+      $scope.users=data;
+      console.log($scope.users);
+    }).
+    error(function(data, status, headers, config) {
+      console.log("OHNOES")
+  });
+  $scope.items = [];
+  $http.get('/items').
+    success(function(data) {
+      $scope.items=data;
+      console.log($scope.users);
+    }).
+    error(function(data, status, headers, config) {
+      console.log("OHNOES")
+  });
+
+}]);

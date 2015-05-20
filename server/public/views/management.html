@@ -1,0 +1,49 @@
+<div class="container bs-docs-container">
+  <div class="row center-block">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4"></div>
+        <div class="bs-docs-section">
+            <div class="alert alert-danger alert-dismissible">Warning: these actions are potentialy devastating and irreversible</div>
+        </div>
+                <!--<div class="form-group">
+                  <input type="text" class="form-control" id="emailInput" ng-model = "emailInput" placeholder="netID" aria-describedby="basic-addon2">
+                </div><br>
+                <div class="form-group">
+                  <input type="password" id="text" ng-model = "passwordInput" class="form-control" placeholder="Password" required>
+                </div>-->
+    <div class="col-sm-12">
+        <div class="btn-group" role="group" aria-label="...">
+          <button ng-click = "clearUsers()" class="btn btn-lg btn-danger">Clear Users</button>
+          <button ng-click = "clearItems()" class="btn btn-lg btn-danger">Clear Items</button>
+        </div>
+    </div>
+      <br><hr>
+    <div class="col-sm-6">
+        <blockquote>users</blockquote>
+        <iframe src="/users" style="border:5px rgba(240, 40, 40, 0.41) solid; width:100%;" scrolling="yes"></iframe>
+        <br><hr>
+        <div class="btn-group btn-block" ng-repeat="x in users">
+            <button class="btn btn-sm btn-info col-sm-10" style="text-align: left;" ng-click="">
+                {{x.name}}, {{x.email}}, {{x._id}}
+            </button>
+            <button class="btn btn-sm btn-danger col-sm-2" style="text-align: middle;" ng-click="">
+                delete
+            </button>
+        </div>
+        
+    </div>
+    <div class="col-sm-6">
+        <blockquote>items</blockquote>
+        <iframe src="/items" style="border:5px rgba(240, 40, 40, 0.41) solid; width:100%;" scrolling="yes"></iframe>
+        <br><hr>
+        <div class="btn-group btn-block" ng-repeat="x in items">
+            <button class="btn btn-sm btn-info col-sm-10" style="text-align: left;" ng-click="">
+                {{x.name}}, {{x.email}}, {{x._id}}
+            </button>
+            <button class="btn btn-sm btn-danger col-sm-2" style="text-align: middle;" ng-click="">
+                delete
+            </button>
+        </div>
+    </div>
+  </div>
+</div>

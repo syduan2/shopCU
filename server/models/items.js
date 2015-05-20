@@ -41,7 +41,7 @@ module.exports=function(mongoose){
     image: String,
     dateCreated : {type:Date,default:Date.now}*/
       
-    name: {type:String, required:true, trim:true},
+    name: {type:String, required:true, trim:true, unique: true},
     email: {type:String, required: true, trim: true, lowercase:true, unique: true},
     image: {type:String},
     password: {type:String, required: true },

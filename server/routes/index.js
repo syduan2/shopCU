@@ -228,8 +228,8 @@ app.post('/auth/register', auth.register);*/
   app.get('/img/:id', function(req,res){
     //image.find({ _id: mongoose.Types.ObjectId(req.params.id)}, function(err, instance){
     image.findOne({ _id: req.params.id}, function(err, instance){
-      
-      res.send(instance.data);
+      if(instance)
+        res.send(instance.data);
     });
   });
   app.get('/post/:id', function(req,res){
@@ -237,6 +237,26 @@ app.post('/auth/register', auth.register);*/
     item.findOne({ _id: req.params.id}, function(err, instance){
       res.send(instance);
     })
+  });
+    
+  app.delete('/users', function(req,res){
+    //item.find({ _id: mongoose.Types.ObjectId(req.params.id)}, function(err, instance){
+    User.remove({},function(err){
+        if(err) {
+            return res.status(500).json({message: 'error',"data":[]});
+        }
+        return res.status(200).json({message: 'Users Cleared',"data":[]});
+    });
+  });
+    
+  app.delete('/items', function(req,res){
+    //item.find({ _id: mongoose.Types.ObjectId(req.params.id)}, function(err, instance){
+    item.remove({},function(err){
+        if(err) {
+            return res.status(500).json({message: 'error',"data":[]});
+        }
+        return res.status(200).json({message: 'Items Cleared',"data":[]});
+    });
   });
     
   app.post('/users',function(req,res,next){
