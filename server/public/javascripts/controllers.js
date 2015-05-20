@@ -156,13 +156,13 @@ controllers.controller("management_controller",['$scope', '$http', '$window', fu
       $http.get('/items').
         success(function(data) {
           $scope.items=data;
-          console.log($scope.users);
+          console.log($scope.items);
         }).
         error(function(data, status, headers, config) {
           console.log("OHNOES")
       });
   }
-    
+  getItems();
   $scope.clearUsers = function() {
         $http.delete('/users').success(function(done){
         alert(done.message);

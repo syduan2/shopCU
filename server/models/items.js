@@ -15,7 +15,9 @@ module.exports=function(mongoose){
               call: Boolean,
               txtmsg: Boolean,
               email: Boolean },
-    images: [String]
+    images: [String],
+    postedBy: [String],
+    markedBy: [String]
   });
   mongoose.model('Item', itemSchema);
 
@@ -45,7 +47,9 @@ module.exports=function(mongoose){
     email: {type:String, required: true, trim: true, lowercase:true, unique: true},
     image: {type:String},
     password: {type:String, required: true },
-    created: {type: Date, default: Date.now}
+    created: {type: Date, default: Date.now},
+    postedItems: [String],
+    markedItems: [String]
   });
   //userSchema.plugin(passportLocalMongoose);
     

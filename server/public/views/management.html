@@ -38,9 +38,9 @@
         <br><hr>
         <div class="btn-group btn-block" ng-repeat="x in items">
             <button class="btn btn-sm btn-info col-sm-10" style="text-align: left;" ng-click="">
-                {{x.name}}, {{x.email}}, {{x._id}}
+                {{x.title}}, {{x._id}}
             </button>
-            <button class="btn btn-sm btn-danger col-sm-2" style="text-align: middle;" ng-click="">
+            <button class="btn btn-sm btn-danger col-sm-2" style="text-align: middle;" ng-click="deleteItem(x._id)">
                 delete
             </button>
         </div>

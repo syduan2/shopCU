@@ -125,7 +125,7 @@ app.post('/auth/register', auth.register);*/
 
 //-authentication-authentication-authentication-authentication-authentication-authentication-authentication-
 
-
+  //not a good way to do GET, consider using query to specify details
   app.get('/items', function(req, res, next) {
     item.find(function(err, items){
       if(err){ return next(err); }
@@ -140,12 +140,25 @@ app.post('/auth/register', auth.register);*/
     });
   });
     
+  /*app.get('/items', function(req, res, next) {
+    item.find(function(err, items){
+      if(err){ return next(err); }
+      items_out = [];
+      for(var i=0; i<items.length; i++){
+
+        if(items[i]){
+          items_out.push(items[i]);
+        }
+      }
+      res.json(items_out);
+    });
+  });*/
+    
   app.get('/users', function(req, res, next) {
     User.find(function(err, users){
       if(err){ return next(err); }
       Users_out = [];
-        console
-      for(var i=0; i<users.length && i<25; i++){
+      for(var i=0; i<users.length; i++){
 
         if(users[i].email != null){
           Users_out.push(users[i]);
