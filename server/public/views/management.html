@@ -5,6 +5,16 @@
         <div class="bs-docs-section">
             <div class="alert alert-danger alert-dismissible">Warning: these actions are potentialy devastating and irreversible</div>
         </div>
+      addItemToUser
+      <div class="input-group">
+        <input type="text" class="form-control col-sm-6" style="float: left; width: 50%;" 
+               ng-model = "itemID" placeholder="item id" aria-describedby="basic-addon2">
+        <input type="text" class="form-control col-sm-6" style="float: left; width: 50%;" 
+               ng-model = "userID" placeholder="user id" aria-describedby="basic-addon2">
+        <span class="input-group-btn">
+          <button class="btn btn-success" type="button" style="text-align: middle;" ng-click="addItemToUser(userID,itemID)">Add Item To User</button>
+        </span>
+      </div><br>
                 <!--<div class="form-group">
                   <input type="text" class="form-control" id="emailInput" ng-model = "emailInput" placeholder="netID" aria-describedby="basic-addon2">
                 </div><br>

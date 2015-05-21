@@ -195,4 +195,16 @@ controllers.controller("management_controller",['$scope', '$http', '$window', fu
     });
     getItems();
   }
+  $scope.addItemToUser = function(userID,itemID) {
+       var outPacket={
+                $addToSet : { postedItems : itemID },
+				//itemID : itemID,
+        };
+        $http.put('/users/'+userID,outPacket).success(function(done){
+        alert(done.message);
+    }).error(function(done){
+        alert(done.message);
+    });
+    getUsers();
+  }
 }]);
