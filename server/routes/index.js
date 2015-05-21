@@ -53,6 +53,15 @@ passport.use(new LocalStrategy({
         console.log(user);
         console.log(done);
       return done(null, user);
+        /*return done(null, {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                image: user.image,
+                created: user.created,
+                postedItems: user.postedItems,
+                markedItems: user.markedItems,
+        });*/ 
     });
   }
 ));
@@ -232,6 +241,9 @@ app.post('/auth/register', auth.register);*/
           txtmsg: req.body.methods.txtmsg,
           email: req.body.methods.email};
         instances.id = req.body.id;
+          
+          instances.postedBy = req.user._id;
+          
         instances.save();
       });
 
@@ -372,9 +384,9 @@ app.post('/auth/register', auth.register);*/
         //res.statusCode = 201;
         //res.json(msg);
           res.status(201).json({message: 'User Added',"data":JSON.stringify(post)});
-          //console.log("============");
-          //console.log(req.user);
-          //console.log("============");
+          console.log("============");
+          console.log(req.user);
+          console.log("============");
         return;
       });
   });
