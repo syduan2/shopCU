@@ -380,49 +380,40 @@ app.post('/auth/register', auth.register);*/
   });
     
   app.put('/users/:id',function(req,res,next){
-      console.log(req.body);
     if (!req.body){
         return res.status(500).json({message: 'no valid changes associated',"data":[]});
     }
-      console.log("twh?");
     User.findOneAndUpdate({_id:req.params.id},req.body,function(err,put){
-        console.log("hey?");
-        if(err){console.log("hey"); console.log(err); return res.status(500).json({message: 'item user association error'+err, "data":[]});}
-        return res.status(200).json({message: 'item user associated', "data":put});
+        if(err){
+            console.log(err); 
+            if (err.path == '_id') { return res.status(404).json({message: 'User Not Found', "data":[]});}
+            if(err.name == 'ValidationError') {
+                var str = '';
+                for (field in err.errors) {str = str+'['+err.errors[field].path+']'+' ';}
+                return res.status(500).json({message: 'sorry, '+str+'required',"data":[]});
+            }
+            if(err.code == 11000) { return res.status(500).json({message: 'Email already used.', "data":[]});}
+            return res.status(500).json({message: 'put err:'+err, "data":[]});}
+        return res.status(200).json({message: 'User Updated', "data":put});
     });
   });
-    /*User.findOneAndUpdate({_id:req.params.id},req.body,function(err,put){
-    if(err) {
-        if (err.path == '_id') {
-            var msg = '{"message": "User Not Found","data":[]}';
-            msg = JSON.parse(msg);
-            res.statusCode = 404;
-            res.json(msg);
-            return;
-        }
-        if(err.code == 11000) {
-            res.status(500).json({message: 'Email already exists.', "data":[]});
-            return;
-        }
-        var msg = '{"message": "Server Error",data":'+JSON.stringify(put)+'}';
-        msg = JSON.parse(msg);
-        res.statusCode = 500;
-        res.json(msg);
-        return next(err);
+  app.put('/items/:id',function(req,res,next){
+    if (!req.body){
+        return res.status(500).json({message: 'no valid changes associated',"data":[]});
     }
-    if(JSON.stringify(put) == 'null') {
-        var msg = '{"message": "User Not Found","data":[]}';
-        msg = JSON.parse(msg);
-        res.statusCode = 404;
-        res.json(msg);
-        return;
-    }
-    var msg = '{"message": "User Updated",'+'"data":'+JSON.stringify(put)+'}';
-    msg = JSON.parse(msg);
-    res.statusCode = 200;
-    res.json(msg);
-    return 200;
-  });*/
+    item.findOneAndUpdate({_id:req.params.id},req.body,function(err,put){
+        if(err){
+            console.log(err); 
+            if (err.path == '_id') { return res.status(404).json({message: 'Item Not Found', "data":[]});}
+            if(err.name == 'ValidationError') {
+                var str = '';
+                for (field in err.errors) {str = str+'['+err.errors[field].path+']'+' ';}
+                return res.status(500).json({message: 'sorry, '+str+'required',"data":[]});
+            }
+            return res.status(500).json({message: 'put err:'+err, "data":[]});}
+        return res.status(200).json({message: 'Item Updated', "data":put});
+    });
+  });
     
     
 };

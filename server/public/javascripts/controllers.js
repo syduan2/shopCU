@@ -138,7 +138,7 @@ controllers.controller("register_controller",['$scope', '$http', '$window', func
   }
 }]);
 
-controllers.controller("management_controller",['$scope', '$http', '$window', function($scope, $http, $window){
+controllers.controller("management_controller",['$scope', '$http', '$window', '$document', function($scope, $http, $window, $document){
   $scope.users = [];
   var getUsers = function(){
       $http.get('/users').
@@ -195,12 +195,46 @@ controllers.controller("management_controller",['$scope', '$http', '$window', fu
     });
     getItems();
   }
+  //*****************************************************The following functions can and should be merged
   $scope.addItemToUser = function(userID,itemID) {
        var outPacket={
                 $addToSet : { postedItems : itemID },
-				//itemID : itemID,
         };
         $http.put('/users/'+userID,outPacket).success(function(done){
+        alert(done.message);
+    }).error(function(done){
+        alert(done.message);
+    });
+    getUsers();
+    //document.getElementById('userframe').contentWindow.location.reload(true);
+  }
+  $scope.addUserToItem = function(userID,itemID) {
+       var outPacket={
+                $addToSet : { postedBy : userID },
+        };
+        $http.put('/items/'+itemID,outPacket).success(function(done){
+        alert(done.message);
+    }).error(function(done){
+        alert(done.message);
+    });
+    getUsers();
+  }
+  $scope.removeItemFromUser = function(userID,itemID) {
+       var outPacket={
+                $pull : { postedItems : itemID },
+        };
+        $http.put('/users/'+userID,outPacket).success(function(done){
+        alert(done.message);
+    }).error(function(done){
+        alert(done.message);
+    });
+    getUsers();
+  }
+  $scope.removeUserFromItem = function(userID,itemID) {
+       var outPacket={
+                $pull : { postedBy : userID },
+        };
+        $http.put('/items/'+itemID,outPacket).success(function(done){
         alert(done.message);
     }).error(function(done){
         alert(done.message);
