@@ -5,7 +5,21 @@
         <div class="bs-docs-section">
             <div class="alert alert-warning alert-dismissible">Warning: these actions are potentialy devastating and irreversible</div>
         </div>
-
+checkColle
+      <button ng-click = "checkColle()" class="btn btn-lg btn-warning">C.C.</button>
+      <br><hr>
+      <div class="btn-group btn-block" ng-repeat="x in collections">
+            <button class="btn btn-sm btn-info col-sm-10" style="text-align: left;" ng-click="">
+                {{x}}
+            </button>
+            <button class="btn btn-sm btn-danger col-sm-2" style="text-align: middle;" ng-click="">
+                delete
+            </button>
+      </div>
+      <br><hr>
+      {{collections}}
+      <br><hr>
+      
       <div class="input-group">
         <input type="text" class="form-control col-sm-6" style="float: left; width: 50%;" 
                ng-model = "userID" placeholder="user id" aria-describedby="basic-addon2">

@@ -241,4 +241,14 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
     });
     getUsers();
   }
+  $scope.collections = [];
+  $scope.checkColle = function() {
+        $http.get('/collections').success(function(done){
+        console.log(done.message);
+         $scope.collections = done.data;
+    }).error(function(done){
+        console.log(done.message);
+    });
+  }
+  $scope.checkColle();
 }]);

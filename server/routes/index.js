@@ -176,7 +176,29 @@ app.post('/auth/register', auth.register);*/
       res.json(Users_out);
     });
   });
-
+    
+  app.get('/collections', function(req, res, next) {
+      //console.log(mongoose.connection.db);
+      //console.log("count:    "+mongoose.connection.db.count);
+      mongoose.connection.db.collections(function(err, collections){
+        console.log("type? "+typeof collections);
+        if(err){ res.status(500).json({message: 'Collections not retrieved',"data":[]}); return next(err);}
+        Colle_out = [];
+          console.log("------");
+          for (var x in collections){
+            console.log(((collections[x]).s).name);
+            Colle_out.push(((collections[x]).s).name);
+          }
+          //console.log(collections.length);
+        /*for(var i=0; i<collections.length; i++){
+            //console.log(collections[i]);
+          if(collections[i].name != null){
+            Colle_out.push(collections[i]);
+          }
+        }*/
+        return res.status(200).json({message: 'Collections retrieved',"data": Colle_out});
+      });
+  });
 
   app.get('/newPost', function (req, res) {
 
