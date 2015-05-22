@@ -141,7 +141,8 @@ controllers.controller("register_controller",['$scope', '$http', '$window', func
 controllers.controller("management_controller",['$scope', '$http', '$window', '$document', function($scope, $http, $window, $document){
   $scope.users = [];
   var getUsers = function(){
-      $http.get('/users').
+      var query='?where={}&limit=2';
+      $http.get('/users'+query).
         success(function(data) {
           $scope.users=data;
           console.log($scope.users);
@@ -217,7 +218,7 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
     }).error(function(done){
         alert(done.message);
     });
-    getUsers();
+    getItems();
   }
   $scope.removeItemFromUser = function(userID,itemID) {
        var outPacket={
@@ -239,7 +240,7 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
     }).error(function(done){
         alert(done.message);
     });
-    getUsers();
+    getItems();
   }
   // scalable/generalized parts are below
   $scope.collections = [];
@@ -253,11 +254,28 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
   }
   $scope.checkColle();
   $scope.collection = '';
+  $scope.currCollection = '';
   $scope.getColle = function(colleName) {
       console.log('/'+colleName);
-        $http.get('/'+colleName).success(function(done){
+      var query='?where={}';
+        $http.get('/'+colleName+query).success(function(done){
          $scope.collection = done;
+         $scope.currCollection = colleName;
     }).error(function(done){
     });
+  }
+  $scope.stf = function(doc) {
+      return JSON.stringify(doc, undefined, 4);
+  }
+  $scope.updateDoc = function(id,doc) {
+      console.log("?");
+    $http.put('/'+$scope.currCollection+'/'+id,JSON.parse(doc)).success(function(done){
+        alert(done.message);
+    }).error(function(done){
+        alert(done.message);
+    });
+    $scope.getColle($scope.currCollection);
+    getUsers();
+    getItems();
   }
 }]);

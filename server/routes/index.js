@@ -163,7 +163,7 @@ app.post('/auth/register', auth.register);*/
     });
   });*/
     
-  app.get('/users', function(req, res, next) {
+  /*app.get('/users', function(req, res, next) {
     User.find(function(err, users){
       if(err){ return next(err); }
       Users_out = [];
@@ -175,8 +175,37 @@ app.post('/auth/register', auth.register);*/
       }
       res.json(Users_out);
     });
-  });
+  });*/
     
+  app.get('/users', function(req, res, next) {
+      //console.log(req);
+    if (!req.query){
+        User.find(function(err, users){
+          if(err){ return next(err); }
+          Users_out = [];
+          for(var i=0; i<users.length; i++){
+
+            if(users[i].email != null){
+              Users_out.push(users[i]);
+            }
+          }
+          return res.json(Users_out);
+        });
+        return;
+    }
+    //console.log(req.query);
+    User.find(req.query.where).limit(req.query.limit).exec(function(err, users){
+      if(err){ return next(err); }
+      Users_out = [];
+      for(var i=0; i<users.length; i++){
+
+        if(users[i].email != null){
+          Users_out.push(users[i]);
+        }
+      }
+      return res.json(Users_out);
+    });
+  });
   app.get('/collections', function(req, res, next) {
       //console.log(mongoose.connection.db);
       //console.log("count:    "+mongoose.connection.db.count);
