@@ -154,7 +154,8 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
   getUsers();
   $scope.items = [];
   var getItems = function(){
-      $http.get('/items').
+      var query='?where={}&limit=2';
+      $http.get('/items'+query).
         success(function(data) {
           $scope.items=data;
           console.log($scope.items);

@@ -135,7 +135,7 @@ app.post('/auth/register', auth.register);*/
 //-authentication-authentication-authentication-authentication-authentication-authentication-authentication-
 
   //not a good way to do GET, consider using query to specify details
-  app.get('/items', function(req, res, next) {
+  /*app.get('/items', function(req, res, next) {
     item.find(function(err, items){
       if(err){ return next(err); }
       items_out = [];
@@ -147,21 +147,18 @@ app.post('/auth/register', auth.register);*/
       }
       res.json(items_out);
     });
-  });
+  });*/
     
-  /*app.get('/items', function(req, res, next) {
-    item.find(function(err, items){
+  app.get('/items', function(req, res, next) {
+    item.find(req.query.where).limit(req.query.limit).exec(function(err, items){
       if(err){ return next(err); }
       items_out = [];
       for(var i=0; i<items.length; i++){
-
-        if(items[i]){
           items_out.push(items[i]);
-        }
       }
-      res.json(items_out);
+      return res.json(items_out);
     });
-  });*/
+  });
     
   /*app.get('/users', function(req, res, next) {
     User.find(function(err, users){
@@ -178,34 +175,16 @@ app.post('/auth/register', auth.register);*/
   });*/
     
   app.get('/users', function(req, res, next) {
-      //console.log(req);
-    if (!req.query){
-        User.find(function(err, users){
-          if(err){ return next(err); }
-          Users_out = [];
-          for(var i=0; i<users.length; i++){
-
-            if(users[i].email != null){
-              Users_out.push(users[i]);
-            }
-          }
-          return res.json(Users_out);
-        });
-        return;
-    }
-    //console.log(req.query);
     User.find(req.query.where).limit(req.query.limit).exec(function(err, users){
       if(err){ return next(err); }
       Users_out = [];
       for(var i=0; i<users.length; i++){
-
-        if(users[i].email != null){
-          Users_out.push(users[i]);
-        }
+        Users_out.push(users[i]);
       }
       return res.json(Users_out);
     });
   });
+    
   app.get('/collections', function(req, res, next) {
       //console.log(mongoose.connection.db);
       //console.log("count:    "+mongoose.connection.db.count);
@@ -362,6 +341,37 @@ app.post('/auth/register', auth.register);*/
         return;
       });
   });
+  app.delete('/items/:id',function(req,res,next){
+      item.findOneAndRemove({_id:req.params.id},req.body,function(err,del){
+        if(err) {
+            if (err.path == '_id') {
+                var msg = '{"message": "Item Not Found","data":[]}';
+                msg = JSON.parse(msg);
+                res.statusCode = 404;
+                res.json(msg);
+                return;
+            }
+            var msg = '{"message": "Server Error",'+'"data":'+JSON.stringify(del)+'}';
+            msg = JSON.parse(msg);
+            res.statusCode = 500 ;
+            res.json(msg);
+            return next(err);
+        }
+        if(JSON.stringify(del) == 'null') {
+            var msg = '{"message": "Item Not Found","data":[]}';
+            msg = JSON.parse(msg);
+            res.statusCode = 404;
+            res.json(msg);
+            return;
+        }
+        var msg = '{"message": "Item Removed",'+'"data":'+JSON.stringify(del)+'}';
+        msg = JSON.parse(msg);
+        res.statusCode = 200;
+        res.json(msg);
+        return;
+      });
+  });
+    
     
   app.post('/users',function(req,res,next){
       //console.log(req);
