@@ -181,12 +181,10 @@ app.post('/auth/register', auth.register);*/
       //console.log(mongoose.connection.db);
       //console.log("count:    "+mongoose.connection.db.count);
       mongoose.connection.db.collections(function(err, collections){
-        console.log("type? "+typeof collections);
         if(err){ res.status(500).json({message: 'Collections not retrieved',"data":[]}); return next(err);}
         Colle_out = [];
-          console.log("------");
           for (var x in collections){
-            console.log(((collections[x]).s).name);
+            //console.log(((collections[x]).s).name);
             Colle_out.push(((collections[x]).s).name);
           }
           //console.log(collections.length);

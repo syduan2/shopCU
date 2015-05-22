@@ -22,6 +22,18 @@ checkColle
       <br><hr>
       collection:
       {{collection}}
+        <div class="btn-group btn-block" ng-repeat="x in collection">
+            <textarea rows="7" class="form-control" aria-describedby="basic-addon2">{{x|json:4}}</textarea>
+            <button class="btn btn-sm btn-info col-sm-8" style="text-align: left;" ng-click="">
+                ID: {{x._id}}
+            </button>
+            <button class="btn btn-sm btn-success col-sm-2" style="text-align: middle;" ng-click="">
+                update
+            </button>
+            <button class="btn btn-sm btn-danger col-sm-2" style="text-align: middle;" ng-click="">
+                delete
+            </button>
+        </div>
       <br><hr>
       <br><hr>
       
