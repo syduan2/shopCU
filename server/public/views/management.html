@@ -9,7 +9,7 @@ checkColle
       <button ng-click = "checkColle()" class="btn btn-lg btn-warning">C.C.</button>
       <br><hr>
       <div class="btn-group btn-block" ng-repeat="x in collections">
-            <button class="btn btn-sm btn-info col-sm-10" style="text-align: left;" ng-click="">
+            <button class="btn btn-sm btn-info col-sm-10" style="text-align: left;" ng-click="getColle(x);">
                 {{x}}
             </button>
             <button class="btn btn-sm btn-danger col-sm-2" style="text-align: middle;" ng-click="">
@@ -17,7 +17,12 @@ checkColle
             </button>
       </div>
       <br><hr>
+      collections:
       {{collections}}
+      <br><hr>
+      collection:
+      {{collection}}
+      <br><hr>
       <br><hr>
       
       <div class="input-group">

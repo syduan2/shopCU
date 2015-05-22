@@ -241,6 +241,7 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
     });
     getUsers();
   }
+  // scalable/generalized parts are below
   $scope.collections = [];
   $scope.checkColle = function() {
         $http.get('/collections').success(function(done){
@@ -251,4 +252,12 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
     });
   }
   $scope.checkColle();
+  $scope.collection = '';
+  $scope.getColle = function(colleName) {
+      console.log('/'+colleName);
+        $http.get('/'+colleName).success(function(done){
+         $scope.collection = done;
+    }).error(function(done){
+    });
+  }
 }]);
