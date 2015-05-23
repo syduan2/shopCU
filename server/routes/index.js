@@ -150,7 +150,7 @@ app.post('/auth/register', auth.register);*/
   });*/
     
   app.get('/items', function(req, res, next) {
-    item.find(req.query.where).limit(req.query.limit).exec(function(err, items){
+    item.find(req.query.where).sort(req.query.sort).skip(req.query.skip).limit(req.query.limit).exec(function(err, items){
       if(err){ return next(err); }
       items_out = [];
       for(var i=0; i<items.length; i++){
@@ -175,7 +175,7 @@ app.post('/auth/register', auth.register);*/
   });*/
     
   app.get('/users', function(req, res, next) {
-    User.find(req.query.where).limit(req.query.limit).exec(function(err, users){
+    User.find(req.query.where).sort(req.query.sort).skip(req.query.skip).limit(req.query.limit).exec(function(err, users){
       if(err){ return next(err); }
       Users_out = [];
       for(var i=0; i<users.length; i++){

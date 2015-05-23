@@ -279,4 +279,11 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
     getUsers();
     getItems();
   }
+  
+  //pagination 
+  $scope.page = function(colle,pageIdx,sequencial) {
+      //colle = which collection to get
+      //pageIdx = determines how much to skip, -1 if sequencial
+      //sequencial = 0 is back, 1 is forward, -1 if pageIdx
+  }
 }]);
