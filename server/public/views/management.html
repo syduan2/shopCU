@@ -89,13 +89,15 @@ checkColle
         <nav>
           <ul class="pagination">
             <li>
-              <a href="#" aria-label="Previous">
+              <a aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
-            <li ng-repeat="x in userSize"><a ng-click="page()">{{x}}</a></li>
+            <li ng-repeat="x in userSize" ng-class="{'active':$index==selectedUserPageIdx}">
+                <a ng-click="page('user',x,undefined,$index)">{{x}}</a>
+            </li>
             <li>
-              <a href="#" aria-label="Next">
+              <a aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>
@@ -116,6 +118,23 @@ checkColle
                 delete
             </button>
         </div>
+        <nav>
+          <ul class="pagination">
+            <li>
+              <a aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li ng-repeat="x in itemSize" ng-class="{'active':$index==selectedItemPageIdx}">
+                <a ng-click="page('item',x,undefined,$index)" >{{x}}</a>
+            </li>
+            <li>
+              <a aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
     </div>
   </div>
 </div>

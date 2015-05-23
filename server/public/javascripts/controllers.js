@@ -141,15 +141,19 @@ controllers.controller("register_controller",['$scope', '$http', '$window', func
 controllers.controller("management_controller",['$scope', '$http', '$window', '$document', function($scope, $http, $window, $document){
   $scope.users = [];
   $scope.userSize = [];
-  var getUsers = function(){
-      var pagesize = 2;
-      var query='?where={}&limit='+pagesize+'&skip=0';
+  var getUsers = function(where,skip,limit,sort){
+      where = (typeof where === 'undefined') ? '{}' : where;
+      skip = (typeof skip === 'undefined') ? '0' : skip;
+      limit = (typeof limit === 'undefined') ? '2' : limit;
+      sort = (typeof sort === 'undefined') ? '{}' : sort;
+      var query='?where='+where+'&sort='+sort+'&limit='+limit+'&skip='+skip;
       $http.get('/users'+query).
         success(function(data) {
           $scope.users=data.data;
           //console.log(data.size/pagesize);
-          console.log("size: "+data.size);
-          for(var i = 0; i < data.size/pagesize; i++) {
+          //console.log("size: "+data.size);
+          $scope.userSize = [];
+          for(var i = 0; i < data.size/limit; i++) {
             $scope.userSize.push(i);
           }
           //console.log($scope.users);
@@ -161,14 +165,18 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
   getUsers();
   $scope.items = [];
   $scope.itemSize = [];
-  var getItems = function(){
-      var pagesize = 2;
-      var query='?where={}&limit='+pagesize;
+  var getItems = function(where,skip,limit,sort){
+      where = (typeof where === 'undefined') ? '{}' : where;
+      skip = (typeof skip === 'undefined') ? '0' : skip;
+      limit = (typeof limit === 'undefined') ? '2' : limit;
+      sort = (typeof sort === 'undefined') ? '{}' : sort;
+      var query='?where='+where+'&sort='+sort+'&limit='+limit+'&skip='+skip;
       $http.get('/items'+query).
         success(function(data) {
           $scope.items=data.data;
           //console.log(data.size/pagesize);
-          for(var i = 0; i < data.size/pagesize; i++) {
+          $scope.itemSize = [];
+          for(var i = 0; i < data.size/limit; i++) {
             $scope.itemSize.push(i);
           }
           //console.log($scope.items);
@@ -282,7 +290,7 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
       return JSON.stringify(doc, undefined, 4);
   }
   $scope.updateDoc = function(id,doc) {
-      console.log("?");
+      //console.log("?");
     $http.put('/'+$scope.currCollection+'/'+id,JSON.parse(doc)).success(function(done){
         alert(done.message);
     }).error(function(done){
@@ -294,8 +302,21 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
   }
   
   //pagination 
-  $scope.page = function(colle,pageIdx,sequencial) {
+  $scope.selectedUserPageIdx = 0;
+  $scope.selectedItemPageIdx = 0;
+  $scope.page = function(colle,pageIdx,sequencial,index) {
+      var pageSize = 2;
       //colle = which collection to get
+      if (colle == 'user')
+          if (typeof pageIdx != 'undefined'){
+            getUsers(undefined,pageIdx*pageSize,pageSize);
+            $scope.selectedUserPageIdx = index;
+          }
+      if (colle == 'item')
+          if (typeof pageIdx != 'undefined'){
+            getItems(undefined,pageIdx*pageSize,pageSize);
+            $scope.selectedItemPageIdx = index;
+          }
       //pageIdx = determines how much to skip, -1 if sequencial
       //sequencial = 0 is back, 1 is forward, -1 if pageIdx
   }
