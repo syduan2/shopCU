@@ -312,10 +312,26 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
             getUsers(undefined,pageIdx*pageSize,pageSize);
             $scope.selectedUserPageIdx = index;
           }
+          else if (typeof sequencial != 'undefined' && sequencial == 0 && $scope.selectedUserPageIdx > 0){
+            $scope.selectedUserPageIdx--;
+            getUsers(undefined,($scope.selectedUserPageIdx)*pageSize,pageSize);
+          }
+          else if (typeof sequencial != 'undefined' && sequencial == 1 && $scope.selectedUserPageIdx < $scope.userSize.length){
+            $scope.selectedUserPageIdx++;
+            getUsers(undefined,($scope.selectedUserPageIdx)*pageSize,pageSize);
+          }
       if (colle == 'item')
           if (typeof pageIdx != 'undefined'){
             getItems(undefined,pageIdx*pageSize,pageSize);
             $scope.selectedItemPageIdx = index;
+          }
+          else if (typeof sequencial != 'undefined' && sequencial == 0 && $scope.selectedItemPageIdx > 0){
+            $scope.selectedItemPageIdx--;
+            getItems(undefined,($scope.selectedItemPageIdx)*pageSize,pageSize);
+          }
+          else if (typeof sequencial != 'undefined' && sequencial == 1 && $scope.selectedItemPageIdx < $scope.itemSize.length){
+            $scope.selectedItemPageIdx++;
+            getItems(undefined,($scope.selectedItemPageIdx)*pageSize,pageSize);
           }
       //pageIdx = determines how much to skip, -1 if sequencial
       //sequencial = 0 is back, 1 is forward, -1 if pageIdx

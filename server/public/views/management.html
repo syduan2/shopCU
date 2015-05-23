@@ -89,7 +89,7 @@ checkColle
         <nav>
           <ul class="pagination">
             <li>
-              <a aria-label="Previous">
+              <a aria-label="Previous" ng-click="page('user',undefined,0,undefined)">
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
@@ -97,7 +97,7 @@ checkColle
                 <a ng-click="page('user',x,undefined,$index)">{{x}}</a>
             </li>
             <li>
-              <a aria-label="Next">
+              <a aria-label="Next" ng-click="page('user',undefined,1,undefined)">
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>
@@ -121,7 +121,7 @@ checkColle
         <nav>
           <ul class="pagination">
             <li>
-              <a aria-label="Previous">
+              <a aria-label="Previous" ng-click="page('item',undefined,0,undefined)">
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
@@ -129,7 +129,7 @@ checkColle
                 <a ng-click="page('item',x,undefined,$index)" >{{x}}</a>
             </li>
             <li>
-              <a aria-label="Next">
+              <a aria-label="Next" ng-click="page('item',undefined,1,undefined)">
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>
