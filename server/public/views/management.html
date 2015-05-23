@@ -1,140 +1,174 @@
 <div class="container bs-docs-container">
-  <div class="row center-block">
-    <div class="col-lg-4"></div>
-    <div class="col-lg-4"></div>
-        <div class="bs-docs-section">
-            <div class="alert alert-warning alert-dismissible">Warning: these actions are potentialy devastating and irreversible</div>
-        </div>
-checkColle
-      <button ng-click = "checkColle()" class="btn btn-lg btn-warning">C.C.</button>
-      <br><hr>
-      <div class="btn-group btn-block" ng-repeat="x in collections">
-            <button class="btn btn-sm btn-info col-sm-10" style="text-align: left;" ng-click="getColle(x);">
-                {{x}}
-            </button>
-            <button class="btn btn-sm btn-danger col-sm-2" style="text-align: middle;" ng-click="">
-                delete
-            </button>
+  <div class="bs-docs-section">
+    <div class="alert alert-warning alert-dismissible">Warning: these actions are potentialy devastating and irreversible</div>
+  </div>
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-info">
+      <div class="panel-heading" role="tab" id="headingOne">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Database Management (less restricted manipulation)
+          </a>
+        </h4>
       </div>
-      <br><hr>
-      collections:
-      {{collections}}
-      <br><hr>
-      collection:
-      {{collection}}
-        <div class="btn-group btn-block" ng-repeat="x in collection">
-            <textarea rows="7" class="form-control" aria-describedby="basic-addon2" ng-model="doc" ng-init="doc=stf(x)"></textarea>
-            <button class="btn btn-sm btn-info col-sm-8" style="text-align: left;" ng-click="">
+      <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+        <div class="panel-body">
+          <div class="row center-block">
+            <button ng-click = "checkColle()" class="btn btn-lg btn-warning">Retrieve Collections</button>
+            <br><hr>
+            <div class="btn-group btn-block" ng-repeat="x in collections">
+              <button class="btn btn-sm btn-info col-sm-10" style="text-align: left;" ng-click="getColle(x);">
+                {{x}}
+              </button>
+              <button class="btn btn-sm btn-danger col-sm-2" style="text-align: middle;" ng-click="">
+                delete (not functional)
+              </button>
+            </div>
+            <br><hr>
+            collections:
+            {{collections}}
+            <br><hr>
+            collection:
+            {{collection}}
+            <div class="btn-group btn-block" ng-repeat="x in collection">
+              <textarea rows="7" class="form-control" aria-describedby="basic-addon2" ng-model="doc" ng-init="doc=stf(x)"></textarea>
+              <button class="btn btn-sm btn-info col-sm-8" style="text-align: left;" ng-click="">
                 ID: {{x._id}}
-            </button>
-            <button class="btn btn-sm btn-success col-sm-2" style="text-align: middle;" ng-click="updateDoc(x._id,doc)">
+              </button>
+              <button class="btn btn-sm btn-success col-sm-2" style="text-align: middle;" ng-click="updateDoc(x._id,doc)">
                 update
-            </button>
-            <button class="btn btn-sm btn-danger col-sm-2" style="text-align: middle;" ng-click="">
+              </button>
+              <button class="btn btn-sm btn-danger col-sm-2" style="text-align: middle;" ng-click="">
                 delete
-            </button>
+              </button>
+            </div>
+            <br><hr>
+            <br><hr>
+          </div>
+
         </div>
-      <br><hr>
-      <br><hr>
-      
-      <div class="input-group">
-        <input type="text" class="form-control col-sm-6" style="float: left; width: 50%;" 
-               ng-model = "userID" placeholder="user id" aria-describedby="basic-addon2">
-        <input type="text" class="form-control col-sm-6" style="float: left; width: 50%;" 
-               ng-model = "itemID" placeholder="item id" aria-describedby="basic-addon2">
-        <span class="input-group-btn">
-          <button class="btn btn-success" type="button" style="text-align: middle;" ng-click="addItemToUser(userID,itemID)" 
-                  onclick="document.getElementById('userframe').contentWindow.location.reload(true);">Add Item To User</button>
-          <button class="btn btn-danger" type="button" style="text-align: middle;" ng-click="removeItemFromUser(userID,itemID)" 
-                  onclick="document.getElementById('userframe').contentWindow.location.reload(true);">Remove Item From User</button>
-        </span>
-      </div><br>
-      <div class="input-group">
-        <input type="text" class="form-control col-sm-6" style="float: left; width: 50%;" 
-               ng-model = "userID2" placeholder="user id" aria-describedby="basic-addon2">
-        <input type="text" class="form-control col-sm-6" style="float: left; width: 50%;" 
-               ng-model = "itemID2" placeholder="item id" aria-describedby="basic-addon2">
-        <span class="input-group-btn">
-          <button class="btn btn-success" type="button" style="text-align: middle;" ng-click="addUserToItem(userID2,itemID2)" 
-                  onclick="document.getElementById('itemframe').contentWindow.location.reload(true);">Add User To Item</button>
-          <button class="btn btn-danger" type="button" style="text-align: middle;" ng-click="removeUserFromItem(userID2,itemID2)" 
-                  onclick="document.getElementById('itemframe').contentWindow.location.reload(true);">Remove User From Item</button>
-        </span>
-      </div><br>
-                <!--<div class="form-group">
-                  <input type="text" class="form-control" id="emailInput" ng-model = "emailInput" placeholder="netID" aria-describedby="basic-addon2">
-                </div><br>
-                <div class="form-group">
-                  <input type="password" id="text" ng-model = "passwordInput" class="form-control" placeholder="Password" required>
-                </div>-->
-    <div class="col-sm-12">
-        <div class="btn-group" role="group" aria-label="...">
-          <button ng-click = "clearUsers()" class="btn btn-lg btn-danger">Clear Users</button>
-          <button ng-click = "clearItems()" class="btn btn-lg btn-danger">Clear Items</button>
-        </div>
+      </div>
     </div>
-      <br><hr>
-    <div class="col-sm-6">
-        <blockquote>users</blockquote>
-        <iframe id="userframe" src="/users" style="border:5px rgba(240, 40, 40, 0.41) solid; width:100%;" scrolling="yes"></iframe>
-        <br><hr>
-        <div class="btn-group btn-block" ng-repeat="x in users">
-            <button class="btn btn-sm btn-info col-sm-10" style="text-align: left;" ng-click="">
+    <div class="panel panel-info">
+      <div class="panel-heading" role="tab" id="headingTwo">
+        <h4 class="panel-title">
+          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Site Management (more restricted manipulation)
+          </a>
+        </h4>
+      </div>
+      <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+        <div class="panel-body">
+          <div class="input-group">
+            <input type="text" class="form-control col-sm-6" style="float: left; width: 50%;" 
+            ng-model = "userID" placeholder="user id" aria-describedby="basic-addon2">
+            <input type="text" class="form-control col-sm-6" style="float: left; width: 50%;" 
+            ng-model = "itemID" placeholder="item id" aria-describedby="basic-addon2">
+            <span class="input-group-btn">
+              <button class="btn btn-success" type="button" style="text-align: middle;" ng-click="addItemToUser(userID,itemID)" 
+              onclick="document.getElementById('userframe').contentWindow.location.reload(true);">Add Item To User</button>
+              <button class="btn btn-danger" type="button" style="text-align: middle;" ng-click="removeItemFromUser(userID,itemID)" 
+              onclick="document.getElementById('userframe').contentWindow.location.reload(true);">Remove Item From User</button>
+            </span>
+          </div><br>
+          <div class="input-group">
+            <input type="text" class="form-control col-sm-6" style="float: left; width: 50%;" 
+            ng-model = "userID2" placeholder="user id" aria-describedby="basic-addon2">
+            <input type="text" class="form-control col-sm-6" style="float: left; width: 50%;" 
+            ng-model = "itemID2" placeholder="item id" aria-describedby="basic-addon2">
+            <span class="input-group-btn">
+              <button class="btn btn-success" type="button" style="text-align: middle;" ng-click="addUserToItem(userID2,itemID2)" 
+              onclick="document.getElementById('itemframe').contentWindow.location.reload(true);">Add User To Item</button>
+              <button class="btn btn-danger" type="button" style="text-align: middle;" ng-click="removeUserFromItem(userID2,itemID2)" 
+              onclick="document.getElementById('itemframe').contentWindow.location.reload(true);">Remove User From Item</button>
+            </span>
+          </div><br>
+          <div class="col-sm-12">
+            <div class="btn-group" role="group" aria-label="...">
+              <button ng-click = "clearUsers()" class="btn btn-lg btn-danger">Clear Users</button>
+              <button ng-click = "clearItems()" class="btn btn-lg btn-danger">Clear Items</button>
+            </div>
+          </div>
+          <br><hr>
+          <div class="col-sm-6">
+            <blockquote>users</blockquote>
+            <iframe id="userframe" src="/users" style="border:5px rgba(240, 40, 40, 0.41) solid; width:100%;" scrolling="yes"></iframe>
+            <br><hr>
+            <div class="btn-group btn-block" ng-repeat="x in users">
+              <button class="btn btn-sm btn-info col-sm-10" style="text-align: left;" ng-click="">
                 {{x.name}}, {{x.email}}, {{x._id}}
-            </button>
-            <button class="btn btn-sm btn-danger col-sm-2" style="text-align: middle;" ng-click="deleteUser(x._id)">
+              </button>
+              <button class="btn btn-sm btn-danger col-sm-2" style="text-align: middle;" ng-click="deleteUser(x._id)">
                 delete
-            </button>
-        </div>
-        <nav>
-          <ul class="pagination">
-            <li>
-              <a aria-label="Previous" ng-click="page('user',undefined,0,undefined)">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li ng-repeat="x in userSize" ng-class="{'active':$index==selectedUserPageIdx}">
-                <a ng-click="page('user',x,undefined,$index)">{{x}}</a>
-            </li>
-            <li>
-              <a aria-label="Next" ng-click="page('user',undefined,1,undefined)">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-    </div>
-      
-      
-    <div class="col-sm-6">
-        <blockquote>items</blockquote>
-        <iframe id="itemframe" src="/items" style="border:5px rgba(240, 40, 40, 0.41) solid; width:100%;" scrolling="yes"></iframe>
-        <br><hr>
-        <div class="btn-group btn-block" ng-repeat="x in items">
-            <button class="btn btn-sm btn-info col-sm-10" style="text-align: left;" ng-click="">
+              </button>
+            </div>
+            <nav>
+              <ul class="pagination">
+                <li>
+                  <a aria-label="Previous" ng-click="page('user',undefined,0,undefined)">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li ng-repeat="x in userSize" ng-class="{'active':$index==selectedUserPageIdx}">
+                  <a ng-click="page('user',x,undefined,$index)">{{x}}</a>
+                </li>
+                <li>
+                  <a aria-label="Next" ng-click="page('user',undefined,1,undefined)">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+
+          <div class="col-sm-6">
+            <blockquote>items</blockquote>
+            <iframe id="itemframe" src="/items" style="border:5px rgba(240, 40, 40, 0.41) solid; width:100%;" scrolling="yes"></iframe>
+            <br><hr>
+            <div class="btn-group btn-block" ng-repeat="x in items">
+              <button class="btn btn-sm btn-info col-sm-10" style="text-align: left;" ng-click="">
                 {{x.title}}, {{x._id}}
-            </button>
-            <button class="btn btn-sm btn-danger col-sm-2" style="text-align: middle;" ng-click="deleteItem(x._id)">
+              </button>
+              <button class="btn btn-sm btn-danger col-sm-2" style="text-align: middle;" ng-click="deleteItem(x._id)">
                 delete
-            </button>
+              </button>
+            </div>
+            <nav>
+              <ul class="pagination">
+                <li>
+                  <a aria-label="Previous" ng-click="page('item',undefined,0,undefined)">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li ng-repeat="x in itemSize" ng-class="{'active':$index==selectedItemPageIdx}">
+                  <a ng-click="page('item',x,undefined,$index)" >{{x}}</a>
+                </li>
+                <li>
+                  <a aria-label="Next" ng-click="page('item',undefined,1,undefined)">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
-        <nav>
-          <ul class="pagination">
-            <li>
-              <a aria-label="Previous" ng-click="page('item',undefined,0,undefined)">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li ng-repeat="x in itemSize" ng-class="{'active':$index==selectedItemPageIdx}">
-                <a ng-click="page('item',x,undefined,$index)" >{{x}}</a>
-            </li>
-            <li>
-              <a aria-label="Next" ng-click="page('item',undefined,1,undefined)">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+      </div>
+    </div>
+
+    <div class="panel panel-info">
+      <div class="panel-heading" role="tab" id="headingThree">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+            Admin Authentication
+          </a>
+        </h4>
+      </div>
+      <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+        <div class="panel-body">
+          Privilege Level Coming Soon. Use the above two panels to access management.
+        </div>
+      </div>
     </div>
   </div>
 </div>
