@@ -139,6 +139,9 @@ controllers.controller("register_controller",['$scope', '$http', '$window', func
 }]);
 
 controllers.controller("management_controller",['$scope', '$http', '$window', '$document', function($scope, $http, $window, $document){
+  $scope.pageSize = 2;
+  $scope.selectedUserPageIdx = 0;
+  $scope.selectedItemPageIdx = 0;
   $scope.users = [];
   $scope.userSize = [];
   var getUsers = function(where,skip,limit,sort){
@@ -162,7 +165,7 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
           console.log("OHNOES")
       });
   }
-  getUsers();
+  getUsers(undefined,($scope.selectedUserPageIdx)*$scope.pageSize,$scope.pageSize);
   $scope.items = [];
   $scope.itemSize = [];
   var getItems = function(where,skip,limit,sort){
@@ -185,14 +188,14 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
           console.log("OHNOES")
       });
   }
-  getItems();
+  getItems(undefined,($scope.selectedItemPageIdx)*$scope.pageSize,$scope.pageSize);
   $scope.clearUsers = function() {
         $http.delete('/users').success(function(done){
         alert(done.message);
     }).error(function(done){
         alert(done.message);
     });
-    getUsers();
+    getUsers(undefined,($scope.selectedUserPageIdx)*$scope.pageSize,$scope.pageSize);
   }
   $scope.deleteUser = function(id) {
         $http.delete('/users/'+id).success(function(done){
@@ -200,7 +203,7 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
     }).error(function(done){
         alert(done.message);
     });
-    getUsers();
+    getItems(undefined,($scope.selectedItemPageIdx)*$scope.pageSize,$scope.pageSize);
   }
   $scope.clearItems = function() {
         $http.delete('/items').success(function(done){
@@ -208,7 +211,7 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
     }).error(function(done){
         alert(done.message);
     });
-    getItems();
+    getItems(undefined,($scope.selectedItemPageIdx)*$scope.pageSize,$scope.pageSize);
   }
   $scope.deleteItem = function(id) {
         $http.delete('/items/'+id).success(function(done){
@@ -216,7 +219,7 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
     }).error(function(done){
         alert(done.message);
     });
-    getItems();
+    getItems(undefined,($scope.selectedItemPageIdx)*$scope.pageSize,$scope.pageSize);
   }
   //*****************************************************The following functions can and should be merged
   $scope.addItemToUser = function(userID,itemID) {
@@ -228,7 +231,7 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
     }).error(function(done){
         alert(done.message);
     });
-    getUsers();
+    getUsers(undefined,($scope.selectedUserPageIdx)*$scope.pageSize,$scope.pageSize);
     //document.getElementById('userframe').contentWindow.location.reload(true);
   }
   $scope.addUserToItem = function(userID,itemID) {
@@ -240,7 +243,7 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
     }).error(function(done){
         alert(done.message);
     });
-    getItems();
+    getItems(undefined,($scope.selectedItemPageIdx)*$scope.pageSize,$scope.pageSize);
   }
   $scope.removeItemFromUser = function(userID,itemID) {
        var outPacket={
@@ -251,7 +254,7 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
     }).error(function(done){
         alert(done.message);
     });
-    getUsers();
+    getUsers(undefined,($scope.selectedUserPageIdx)*$scope.pageSize,$scope.pageSize);
   }
   $scope.removeUserFromItem = function(userID,itemID) {
        var outPacket={
@@ -262,7 +265,7 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
     }).error(function(done){
         alert(done.message);
     });
-    getItems();
+    getItems(undefined,($scope.selectedItemPageIdx)*$scope.pageSize,$scope.pageSize);
   }
   // scalable/generalized parts are below
   $scope.collections = [];
@@ -297,15 +300,13 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
         alert(done.message);
     });
     $scope.getColle($scope.currCollection);
-    getUsers();
-    getItems();
+    getUsers(undefined,($scope.selectedUserPageIdx)*$scope.pageSize,$scope.pageSize);
+    getItems(undefined,($scope.selectedItemPageIdx)*$scope.pageSize,$scope.pageSize);
   }
   
   //pagination 
-  $scope.selectedUserPageIdx = 0;
-  $scope.selectedItemPageIdx = 0;
   $scope.page = function(colle,pageIdx,sequencial,index) {
-      var pageSize = 2;
+      var pageSize = $scope.pageSize;
       //colle = which collection to get
       if (colle == 'user')
           if (typeof pageIdx != 'undefined'){
