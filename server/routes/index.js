@@ -154,9 +154,11 @@ app.post('/auth/register', auth.register);*/
       if(err){ return next(err); }
       items_out = [];
       for(var i=0; i<items.length; i++){
-          items_out.push(items[i]);
+        items_out.push(items[i]);
       }
-      return res.json(items_out);
+      item.find(req.query.where).count().exec(function(err, count){
+        return res.status(200).json({message: 'items got',"data": items_out, size: count});
+      });
     });
   });
     
@@ -181,7 +183,9 @@ app.post('/auth/register', auth.register);*/
       for(var i=0; i<users.length; i++){
         Users_out.push(users[i]);
       }
-      return res.json(Users_out);
+      User.find(req.query.where).count().exec(function(err, count){
+        return res.status(200).json({message: 'users got',"data": Users_out, size: count});
+      });
     });
   });
     

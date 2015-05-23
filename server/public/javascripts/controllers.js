@@ -140,12 +140,19 @@ controllers.controller("register_controller",['$scope', '$http', '$window', func
 
 controllers.controller("management_controller",['$scope', '$http', '$window', '$document', function($scope, $http, $window, $document){
   $scope.users = [];
+  $scope.userSize = [];
   var getUsers = function(){
-      var query='?where={}&limit=2';
+      var pagesize = 2;
+      var query='?where={}&limit='+pagesize+'&skip=0';
       $http.get('/users'+query).
         success(function(data) {
-          $scope.users=data;
-          console.log($scope.users);
+          $scope.users=data.data;
+          //console.log(data.size/pagesize);
+          console.log("size: "+data.size);
+          for(var i = 0; i < data.size/pagesize; i++) {
+            $scope.userSize.push(i);
+          }
+          //console.log($scope.users);
         }).
         error(function(data, status, headers, config) {
           console.log("OHNOES")
@@ -153,12 +160,18 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
   }
   getUsers();
   $scope.items = [];
+  $scope.itemSize = [];
   var getItems = function(){
-      var query='?where={}&limit=2';
+      var pagesize = 2;
+      var query='?where={}&limit='+pagesize;
       $http.get('/items'+query).
         success(function(data) {
-          $scope.items=data;
-          console.log($scope.items);
+          $scope.items=data.data;
+          //console.log(data.size/pagesize);
+          for(var i = 0; i < data.size/pagesize; i++) {
+            $scope.itemSize.push(i);
+          }
+          //console.log($scope.items);
         }).
         error(function(data, status, headers, config) {
           console.log("OHNOES")
@@ -260,7 +273,7 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
       console.log('/'+colleName);
       var query='?where={}';
         $http.get('/'+colleName+query).success(function(done){
-         $scope.collection = done;
+         $scope.collection = done.data;
          $scope.currCollection = colleName;
     }).error(function(done){
     });
