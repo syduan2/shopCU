@@ -1,6 +1,11 @@
 <div class="container bs-docs-container">
   <div class="bs-docs-section">
     <div class="alert alert-warning alert-dismissible">Warning: these actions are potentialy devastating and irreversible</div>
+    <div class="progress" ng-show="pendingRequest>0">
+      <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+        <span>{{pendingRequest}} Request{{pendingRequest>1?'s':''}} Pending</span>
+      </div>
+    </div>
   </div>
   <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel panel-info">
@@ -25,11 +30,13 @@
               </button>
             </div>
             <br><hr>
-            collections:
-            {{collections}}
+            <p style="word-break:break-all">
+            collections:<br>{{collections|json}}
+            </p>
             <br><hr>
-            collection:
-            {{collection}}
+            <p style="word-break:break-all">
+            collection:<br>{{collection||json}}
+            </p>
             <div class="btn-group btn-block" ng-repeat="x in collection">
               <textarea rows="7" class="form-control" aria-describedby="basic-addon2" ng-model="doc" ng-init="doc=stf(x)"></textarea>
               <button class="btn btn-sm btn-info col-sm-8" style="text-align: left;" ng-click="">
@@ -42,8 +49,7 @@
                 delete
               </button>
             </div>
-            <br><hr>
-            <br><hr>
+            <br><hr><hr>
           </div>
 
         </div>

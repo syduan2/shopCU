@@ -280,15 +280,28 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
   $scope.checkColle();
   $scope.collection = '';
   $scope.currCollection = '';
+                                                                                    $scope.pendingRequest = 0; 
   $scope.getColle = function(colleName) {
-      console.log('/'+colleName);
-      var query='?where={}';
-        $http.get('/'+colleName+query).success(function(done){
+                                                                                    $scope.pendingRequest++;
+    console.log('/'+colleName);
+    var query='?where='+colleName+'';
+    $http.get('/collection'+query).success(function(done){
+         $scope.collection = done.data;
+         $scope.currCollection = colleName;    
+                                                                                            $scope.pendingRequest--; 
+    }).error(function(done){
+                                                                                            $scope.pendingRequest--; 
+    }); 
+  }
+  /*$scope.getColle = function(colleName) {
+    console.log('/'+colleName);
+    var query='?where={}';
+    $http.get('/'+colleName+query).success(function(done){
          $scope.collection = done.data;
          $scope.currCollection = colleName;
     }).error(function(done){
     });
-  }
+  }*/
   $scope.stf = function(doc) {
       return JSON.stringify(doc, undefined, 4);
   }

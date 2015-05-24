@@ -209,6 +209,17 @@ app.post('/auth/register', auth.register);*/
         return res.status(200).json({message: 'Collections retrieved',"data": Colle_out});
       });
   });
+    
+  app.get('/collection', function(req, res, next) {
+      //console.log(req.query.where);
+    mongoose.connection.db.collection(req.query.where,function (err, collection) {
+      if(err){res.status(500).json({message: req.query.where+' not retrieved',"data":[]}); return next(err);}
+      collection.find().toArray(function(err, docs){
+          //console.log(docs);
+        return res.status(200).json({message: req.query.where+' retrieved',"data": docs});
+      });
+    });
+  });
 
   app.get('/newPost', function (req, res) {
 
