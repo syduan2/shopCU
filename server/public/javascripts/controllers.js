@@ -6,7 +6,7 @@ controllers.controller("feed_populate",['$scope', '$http', function($scope, $htt
   $scope.$on('$viewContentLoaded', function(){
     $http.get('/items').
     success(function(data, status, headers, config) {
-      $scope.items=angular.fromJson(data);
+      $scope.items=angular.fromJson(data.data);
       console.log($scope.items)
     }).
     error(function(data, status, headers, config) {
@@ -317,7 +317,7 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
             $scope.selectedUserPageIdx--;
             getUsers(undefined,($scope.selectedUserPageIdx)*pageSize,pageSize);
           }
-          else if (typeof sequencial != 'undefined' && sequencial == 1 && $scope.selectedUserPageIdx < $scope.userSize.length){
+          else if (typeof sequencial != 'undefined' && sequencial == 1 && $scope.selectedUserPageIdx < $scope.userSize.length-1){
             $scope.selectedUserPageIdx++;
             getUsers(undefined,($scope.selectedUserPageIdx)*pageSize,pageSize);
           }
@@ -330,7 +330,7 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
             $scope.selectedItemPageIdx--;
             getItems(undefined,($scope.selectedItemPageIdx)*pageSize,pageSize);
           }
-          else if (typeof sequencial != 'undefined' && sequencial == 1 && $scope.selectedItemPageIdx < $scope.itemSize.length){
+          else if (typeof sequencial != 'undefined' && sequencial == 1 && $scope.selectedItemPageIdx < $scope.itemSize.length-1){
             $scope.selectedItemPageIdx++;
             getItems(undefined,($scope.selectedItemPageIdx)*pageSize,pageSize);
           }
