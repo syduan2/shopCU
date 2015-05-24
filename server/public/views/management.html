@@ -51,7 +51,8 @@
     </div>
     <div class="panel panel-info">
       <div class="panel-heading" role="tab" id="headingTwo">
-        <h4 class="panel-title">
+        <h4 class="panel-title" onclick="document.getElementById('userframe').contentWindow.location.reload(true);
+                                         document.getElementById('itemframe').contentWindow.location.reload(true);">
           <a class="collapsed" data-toggle="collapse" data-parent="#accordion" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
             Site Management (more restricted manipulation)
           </a>
@@ -91,7 +92,7 @@
           </div>
           <br><hr>
           <div class="col-sm-6">
-            <blockquote>users</blockquote>
+            <blockquote onclick="document.getElementById('userframe').contentWindow.location.reload(true);">users (click to refresh)</blockquote>
             <iframe id="userframe" src="/users" style="border:5px rgba(240, 40, 40, 0.41) solid; width:100%;" scrolling="yes"></iframe>
             <br><hr>
             <div class="btn-group btn-block" ng-repeat="x in users">
@@ -123,7 +124,7 @@
 
 
           <div class="col-sm-6">
-            <blockquote>items</blockquote>
+            <blockquote onclick="document.getElementById('itemframe').contentWindow.location.reload(true);">items (click to refresh)</blockquote>
             <iframe id="itemframe" src="/items" style="border:5px rgba(240, 40, 40, 0.41) solid; width:100%;" scrolling="yes"></iframe>
             <br><hr>
             <div class="btn-group btn-block" ng-repeat="x in items">
