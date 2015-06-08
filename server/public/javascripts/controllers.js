@@ -30,7 +30,6 @@ controllers.controller("feed_populate",['$scope', '$http', function($scope, $htt
 }]);
 
 controllers.controller("sell_controller",['$scope', '$http', function($scope, $http){
-  //var myDropzone = new Dropzone("dropzone", { url: "/image-upload"});
   $scope.itemID='';
   var myDropzone;
   $http.get('/newPost').
@@ -76,14 +75,17 @@ controllers.controller("sell_controller",['$scope', '$http', function($scope, $h
       });
   });
 }]);
+
 controllers.controller('view_controller', ['$scope', '$http', '$routeParams',
   function($scope, $http, $routeParams){
     $scope.item={}
     $http.get('/post/'+$routeParams.postID).
     success(function(data, status, headers, config) {
+      //retrieve item data from the get request
       $scope.item=angular.fromJson(data);
-      console.log($scope.item);
       $scope.images = $scope.item.images;
+
+      //Manage the check marks next to the items
       if(!$scope.item.methods.facebook) $("#facebook").attr('class', 'glyphicon glyphicon-remove');
       if(!$scope.item.methods.txtmsg)  $("#txtmsg").attr('class', 'glyphicon glyphicon-remove');
       if(!$scope.item.methods.call)  $("#call").attr('class', 'glyphicon glyphicon-remove');
@@ -92,48 +94,39 @@ controllers.controller('view_controller', ['$scope', '$http', '$routeParams',
       if(!$scope.item.negotiable) $("#negotiable").attr('class', 'glyphicon glyphicon-remove');
     }).
     error(function(data, status, headers, config) {
-      console.log("OHNOES")
+      alert("Item Could not be retrieved\n");
+      window.location.href("/home/");
     });
   }
 ]);
+
 controllers.controller("register_controller",['$scope', '$http', '$window', function($scope, $http, $window){
     if ($window.sessionStorage.user)$scope.usernameDisplay = $window.sessionStorage.user;
     else $scope.usernameDisplay = 'New Guest';
     $scope.login = function(email,password) {
-        //console.log("username=" + name + "&email="+email);
-     /* var dataObj = {
-				username : name,
-				email : email
-		};	*/
-    /*$http({
-                    method: 'POST',
-                    url: '/users',
-                    data: "username=" + name + "&email="+email,
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                })*/
-        var outPacket={
-                email : email,
-				email : email,
-                password : password
-        };
-        $http.post('/login', outPacket).success(function(done){
+      var outPacket={
+        email : email,
+        email : email,
+        password : password
+      };
+      $http.post('/login', outPacket).success(function(done){
         alert(done.message);
         $window.sessionStorage.user = $scope.usernameDisplay = done.data;
-    }).error(function(done){
+      }).error(function(done){
         alert(done.message);
-    });
+      });
   }
 
-    $scope.add = function(name,email,password) {
-        var outPacket={
-                name : name,
-				        email : email,
-                password : password
-        };
-        $http.post('/users', outPacket).success(function(data){
-          alert(data.message);
+  $scope.add = function(name,email,password) {
+    var outPacket={
+      name : name,
+      email : email,
+      password : password
+    };
+    $http.post('/users', outPacket).success(function(data){
+      alert(data.message);
     }).error(function(data){
-        alert(data.message);
+      alert(data.message);
     });
   }
 }]);
@@ -280,18 +273,18 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
   $scope.checkColle();
   $scope.collection = '';
   $scope.currCollection = '';
-                                                                                    $scope.pendingRequest = 0; 
+  $scope.pendingRequest = 0;
   $scope.getColle = function(colleName) {
-                                                                                    $scope.pendingRequest++;
+  $scope.pendingRequest++;
     console.log('/'+colleName);
     var query='?where='+colleName+'';
     $http.get('/collection'+query).success(function(done){
-         $scope.collection = done.data;
-         $scope.currCollection = colleName;    
-                                                                                            $scope.pendingRequest--; 
+      $scope.collection = done.data;
+      $scope.currCollection = colleName;
+      $scope.pendingRequest--;
     }).error(function(done){
-                                                                                            $scope.pendingRequest--; 
-    }); 
+      $scope.pendingRequest--;
+    });
   }
   /*$scope.getColle = function(colleName) {
     console.log('/'+colleName);
@@ -316,37 +309,39 @@ controllers.controller("management_controller",['$scope', '$http', '$window', '$
     getUsers(undefined,($scope.selectedUserPageIdx)*$scope.pageSize,$scope.pageSize);
     getItems(undefined,($scope.selectedItemPageIdx)*$scope.pageSize,$scope.pageSize);
   }
-  
-  //pagination 
+
+  //pagination
   $scope.page = function(colle,pageIdx,sequencial,index) {
       var pageSize = $scope.pageSize;
       //colle = which collection to get
-      if (colle == 'user')
-          if (typeof pageIdx != 'undefined'){
-            getUsers(undefined,pageIdx*pageSize,pageSize);
-            $scope.selectedUserPageIdx = index;
-          }
-          else if (typeof sequencial != 'undefined' && sequencial == 0 && $scope.selectedUserPageIdx > 0){
-            $scope.selectedUserPageIdx--;
-            getUsers(undefined,($scope.selectedUserPageIdx)*pageSize,pageSize);
-          }
-          else if (typeof sequencial != 'undefined' && sequencial == 1 && $scope.selectedUserPageIdx < $scope.userSize.length-1){
-            $scope.selectedUserPageIdx++;
-            getUsers(undefined,($scope.selectedUserPageIdx)*pageSize,pageSize);
-          }
-      if (colle == 'item')
-          if (typeof pageIdx != 'undefined'){
-            getItems(undefined,pageIdx*pageSize,pageSize);
-            $scope.selectedItemPageIdx = index;
-          }
-          else if (typeof sequencial != 'undefined' && sequencial == 0 && $scope.selectedItemPageIdx > 0){
-            $scope.selectedItemPageIdx--;
-            getItems(undefined,($scope.selectedItemPageIdx)*pageSize,pageSize);
-          }
-          else if (typeof sequencial != 'undefined' && sequencial == 1 && $scope.selectedItemPageIdx < $scope.itemSize.length-1){
-            $scope.selectedItemPageIdx++;
-            getItems(undefined,($scope.selectedItemPageIdx)*pageSize,pageSize);
-          }
+      if (colle == 'user'){
+        if (typeof pageIdx != 'undefined'){
+          getUsers(undefined,pageIdx*pageSize,pageSize);
+          $scope.selectedUserPageIdx = index;
+        }
+        else if (typeof sequencial != 'undefined' && sequencial == 0 && $scope.selectedUserPageIdx > 0){
+          $scope.selectedUserPageIdx--;
+          getUsers(undefined,($scope.selectedUserPageIdx)*pageSize,pageSize);
+        }
+        else if (typeof sequencial != 'undefined' && sequencial == 1 && $scope.selectedUserPageIdx < $scope.userSize.length-1){
+          $scope.selectedUserPageIdx++;
+          getUsers(undefined,($scope.selectedUserPageIdx)*pageSize,pageSize);
+        }
+      }
+      if (colle == 'item'){
+        if (typeof pageIdx != 'undefined'){
+          getItems(undefined,pageIdx*pageSize,pageSize);
+          $scope.selectedItemPageIdx = index;
+        }
+        else if (typeof sequencial != 'undefined' && sequencial == 0 && $scope.selectedItemPageIdx > 0){
+          $scope.selectedItemPageIdx--;
+          getItems(undefined,($scope.selectedItemPageIdx)*pageSize,pageSize);
+        }
+        else if (typeof sequencial != 'undefined' && sequencial == 1 && $scope.selectedItemPageIdx < $scope.itemSize.length-1){
+          $scope.selectedItemPageIdx++;
+          getItems(undefined,($scope.selectedItemPageIdx)*pageSize,pageSize);
+        }
+      }
       //pageIdx = determines how much to skip, -1 if sequencial
       //sequencial = 0 is back, 1 is forward, -1 if pageIdx
   }

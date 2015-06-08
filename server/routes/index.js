@@ -19,7 +19,7 @@ module.exports=function(app, mongoose){
   var item = mongoose.model('Item');
   var image = mongoose.model('Image');
   var User = mongoose.model('User');
-    
+
     //-authentication-authentication-authentication-authentication-authentication-authentication-authentication-
 
   app.use(express.static('public'));
@@ -61,39 +61,48 @@ passport.use(new LocalStrategy({
                 created: user.created,
                 postedItems: user.postedItems,
                 markedItems: user.markedItems,
-        });*/ 
+        });*/
     });
   }
 ));
-    
-    passport.serializeUser(function(user, done) {
+
+passport.serializeUser(function(user, done) {
   done(null, user._id);
 });
 
 passport.deserializeUser(function(id, done) {
+  console.log('deserialize\n');
   User.findById(id, function(err, user) {
     done(err, user);
   });
 });
-    
+
 /*app.post('/login',
   passport.authenticate('local', { successRedirect: '/',
                                    failureRedirect: '/',
                                    failureFlash: true
                                  })
 );*/
+
+
 app.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
-    if (err) { return next(err); }
+    if (err) return next(err);
     // Redirect if it fails
-    if (!user) { console.log('info: '+info); return res.status(200).json(info); }
+    if (!user){
+      console.log('info: '+info);
+      return res.status(200).json(info);
+    }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
       // Redirect if it succeeds
       return res.status(200).json({message: 'Logged in',"data": user.name});
     });
   })(req, res, next);
+
 });
+
+
 /*app.get('/login', function(req, res) {
     console.log(flash('error'));
     res.send();
@@ -120,7 +129,7 @@ app.post('/login', function(req, res, next) {
     passport.use(User.localStrategy);
 passport.serializeUser(User.serializeUser);
 passport.deserializeUser(User.deserializeUser);
-    
+
     app.use(passport.initialize());
 app.use(passport.session());
     var auth = require('../public/javascripts/authCon.js');
@@ -148,7 +157,7 @@ app.post('/auth/register', auth.register);*/
       res.json(items_out);
     });
   });*/
-    
+
   app.get('/items', function(req, res, next) {
     item.find(req.query.where).sort(req.query.sort).skip(req.query.skip).limit(req.query.limit).exec(function(err, items){
       if(err){ return next(err); }
@@ -160,8 +169,9 @@ app.post('/auth/register', auth.register);*/
         return res.status(200).json({message: 'items got',"data": items_out, size: count});
       });
     });
+    console.log(req.user);
   });
-    
+
   /*app.get('/users', function(req, res, next) {
     User.find(function(err, users){
       if(err){ return next(err); }
@@ -175,7 +185,7 @@ app.post('/auth/register', auth.register);*/
       res.json(Users_out);
     });
   });*/
-    
+
   app.get('/users', function(req, res, next) {
     User.find(req.query.where).sort(req.query.sort).skip(req.query.skip).limit(req.query.limit).exec(function(err, users){
       if(err){ return next(err); }
@@ -188,7 +198,7 @@ app.post('/auth/register', auth.register);*/
       });
     });
   });
-    
+
   app.get('/collections', function(req, res, next) {
       //console.log(mongoose.connection.db);
       //console.log("count:    "+mongoose.connection.db.count);
@@ -209,7 +219,7 @@ app.post('/auth/register', auth.register);*/
         return res.status(200).json({message: 'Collections retrieved',"data": Colle_out});
       });
   });
-    
+
   app.get('/collection', function(req, res, next) {
       //console.log(req.query.where);
     mongoose.connection.db.collection(req.query.where,function (err, collection) {
@@ -284,9 +294,9 @@ app.post('/auth/register', auth.register);*/
           txtmsg: req.body.methods.txtmsg,
           email: req.body.methods.email};
         instances.id = req.body.id;
-          
+
           instances.postedBy = req.user._id;
-          
+
         instances.save();
       });
 
@@ -306,7 +316,7 @@ app.post('/auth/register', auth.register);*/
       res.send(instance);
     })
   });
-    
+
   app.delete('/users', function(req,res){
     //item.find({ _id: mongoose.Types.ObjectId(req.params.id)}, function(err, instance){
     User.remove({},function(err){
@@ -316,7 +326,7 @@ app.post('/auth/register', auth.register);*/
         return res.status(200).json({message: 'Users Cleared',"data":[]});
     });
   });
-    
+
   app.delete('/items', function(req,res){
     //item.find({ _id: mongoose.Types.ObjectId(req.params.id)}, function(err, instance){
     item.remove({},function(err){
@@ -386,92 +396,75 @@ app.post('/auth/register', auth.register);*/
         return;
       });
   });
-    
-    
+
+
+  //Add user function
   app.post('/users',function(req,res,next){
-      //console.log(req);
+      //check if the password is present
       if(req.body.password){
           var bcrypt = require('bcrypt');
           var hash = bcrypt.hashSync(req.body.password, 10);
           console.log("hash: "+hash);
           req.body.password = hash;
       }
+
+      //check if the email field is present
       if(!req.body.email){
-            res.status(500).json({message: 'Email field is required',"data":[]});
-            return;
-        }
-        else{
-            var emailFormat = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-            if (req.body.email.search(emailFormat) == -1) {
-                res.status(500).json({message: 'Email address is not valid',"data":[]});
-                return;
-            }
-        }
+        res.status(500).json({message: 'Email field is required',"data":[]});
+        return;
+      }
+
+      //Check if email format is valid
+      var emailFormat = /^[a-z0-9]+$/;
+      if (req.body.email.search(emailFormat) == -1) {
+          console.log("invalid email");
+          res.status(500).json({message: 'Email address is not valid',"data":[]});
+          return;
+      }
+
+      //Create user
       User.create(req.body,function(err,post){
-          //console.log("------------------------------------------------------------");
-          //console.log(req.body);
-          //console.log("------------------------------------------------------------");
+        //see if there are any errors
         if(err) {
-            console.log("------XXXX-------");
-            console.log(err);
-            console.log("------XXXX-------");
-            if(err.name == 'ValidationError') {
-                var str = '';
-                for (field in err.errors) {str = str+'['+err.errors[field].path+']'+' ';}
-                res.status(500).json({message: 'sorry, '+str+'required',"data":[]});
-                return;
-            }
-            if(err.code == 11000) {
-                res.status(500).json({message: 'Email already used.', "data":[]});
-                return;
-            }
-            var submsg;
-            if(post) submsg = JSON.stringify(post);
-            else submsg = '[]'
-            var msg = '{"message": "Server Error","data":'+submsg+'}';
-            msg = JSON.parse(msg);
-            res.statusCode = 500;
-            res.json(msg);
-            return next(err);
-        }
-        if(!post.name){
-            res.status(500).json({message: 'Name field is required',"data":[]});
+          console.log("------XXXX-------");
+          console.log(err);
+          console.log("------XXXX-------");
+          if(err.name == 'ValidationError') {
+            var str = '';
+            for (field in err.errors) {str = str+'['+err.errors[field].path+']'+' ';}
+            res.status(500).json({message: 'sorry, '+str+'required',"data":[]});
             return;
-        }
-        if(!post.email){
-            res.status(500).json({message: 'Email field is required',"data":[]});
+          }
+          if(err.code == 11000) {
+            res.status(500).json({message: 'Email already used.', "data":[]});
             return;
+          }
+          var submsg;
+          if(post) submsg = JSON.stringify(post);
+          else submsg = '[]'
+          var msg = '{"message": "Server Error","data":'+submsg+'}';
+          msg = JSON.parse(msg);
+          res.statusCode = 500;
+          res.json(msg);
+          return next(err);
         }
-        else{
-            var emailFormat = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-            if (post.email.search(emailFormat) == -1) {
-                res.status(500).json({message: 'Email address is not valid',"data":[]});
-                return;
-            }
-        }
-        if(!post.password){
-            res.status(500).json({message: 'Password field is required',"data":[]});
-            return;
-        }
-        //var msg = '{"message": "User Added","data":'+JSON.stringify(post)+'}';
-        //msg = JSON.parse(msg);
-        //res.statusCode = 201;
-        //res.json(msg);
-          res.status(201).json({message: 'User Added',"data":JSON.stringify(post)});
-          console.log("============");
-          console.log(req.user);
-          console.log("============");
+
+        //return success message
+        res.status(201).json({message: 'User Added',"data":JSON.stringify(post)});
+        console.log("============");
+        console.log(req.user);
+        console.log("============");
         return;
       });
   });
-    
+
   app.put('/users/:id',function(req,res,next){
     if (!req.body){
         return res.status(500).json({message: 'no valid changes associated',"data":[]});
     }
     User.findOneAndUpdate({_id:req.params.id},req.body,function(err,put){
         if(err){
-            console.log(err); 
+            console.log(err);
             if (err.path == '_id') { return res.status(404).json({message: 'User Not Found', "data":[]});}
             if(err.name == 'ValidationError') {
                 var str = '';
@@ -489,7 +482,7 @@ app.post('/auth/register', auth.register);*/
     }
     item.findOneAndUpdate({_id:req.params.id},req.body,function(err,put){
         if(err){
-            console.log(err); 
+            console.log(err);
             if (err.path == '_id') { return res.status(404).json({message: 'Item Not Found', "data":[]});}
             if(err.name == 'ValidationError') {
                 var str = '';
@@ -500,7 +493,6 @@ app.post('/auth/register', auth.register);*/
         return res.status(200).json({message: 'Item Updated', "data":put});
     });
   });
-    
-    
-};
 
+
+};
