@@ -4,6 +4,7 @@ var PassportLocalStrategy = require('passport-local').Strategy;
 module.exports=function(mongoose){
   var itemSchema = new mongoose.Schema({
     title: String,
+    user: String,
     description: String,
     tag: String,
     price: Number,
@@ -25,7 +26,7 @@ module.exports=function(mongoose){
     data: Buffer
   });
   mongoose.model('Image', imgSchema);
-    
+
   var userSchema = new mongoose.Schema({
     /*username: {type:String, index: { unique: true }},
     lastname: String,
@@ -42,7 +43,7 @@ module.exports=function(mongoose){
     postedItems : [String],
     image: String,
     dateCreated : {type:Date,default:Date.now}*/
-      
+
     name: {type:String, required:true, trim:true, unique: true},
     email: {type:String, required: true, trim: true, lowercase:true, unique: true},
     image: {type:String},
@@ -52,7 +53,7 @@ module.exports=function(mongoose){
     markedItems: [String]
   });
   //userSchema.plugin(passportLocalMongoose);
-    
+
 /*    userSchema.statics.localStrategy = new PassportLocalStrategy({
         usernameField: 'email',
         passwordField: 'password',
@@ -99,10 +100,10 @@ userSchema.statics.deserializeUser = function(obj, done){
     done(null, obj);
 };*/
 
-    
+
   mongoose.model('User', userSchema);
   mongoose.model('User', userSchema).on('index', function (err) {
     if (err) console.error(err);
   });
-    
+
 };
