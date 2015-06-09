@@ -1,16 +1,15 @@
 var express = require('express')
 var session = require('express-session');
-var passport = require('passport');
 var flash = require('connect-flash');
-var LocalStrategy = require('passport-local').Strategy;
 var router = express.Router();
 
 //var ObjectID = require('mongodb').ObjectID;
 module.exports=function(app, mongoose){
   require('../models/items')(mongoose);
+  var passport = require('passport');
+  var LocalStrategy = require('passport-local').Strategy;
   var fs = require('fs');
   var multiparty = require('multiparty');
-  var fs = require('fs');
   var util = require('util');
   bodyParser = require('body-parser')
 
@@ -19,8 +18,6 @@ module.exports=function(app, mongoose){
   var item = mongoose.model('Item');
   var image = mongoose.model('Image');
   var User = mongoose.model('User');
-
-    //-authentication-authentication-authentication-authentication-authentication-authentication-authentication-
 
   app.use(express.static('public'));
   //app.use(cookieParser());
@@ -31,133 +28,63 @@ module.exports=function(app, mongoose){
   app.use(flash());
 
 
-passport.use(new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password'
-  },
-  function(username, password, done) {
-      console.log("-----");
-    User.findOne({ email: username }, function (err, user) {
-      if (err) { console.log("err"); return done(err); }
-      if (!user) { console.log("No user with this email");
-        return done(null, false, { message: 'Incorrect email.' });
-      }
-      //if (!user.validPassword(password)) { console.log("wrong password");
-      //if (user.password != password) { console.log("wrong password");
-      var bcrypt = require('bcrypt');
-      if (!bcrypt.compareSync(password, user.password)) { console.log("Wrong password");
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-        console.log("good");
-        //$window.sessionStorage.user = user;
-        console.log(user);
-        console.log(done);
-      return done(null, user);
-        /*return done(null, {
-                _id: user._id,
-                name: user.name,
-                email: user.email,
-                image: user.image,
-                created: user.created,
-                postedItems: user.postedItems,
-                markedItems: user.markedItems,
-        });*/
-    });
-  }
-));
-
-passport.serializeUser(function(user, done) {
-  done(null, user._id);
-});
-
-passport.deserializeUser(function(id, done) {
-  console.log('deserialize\n');
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
-
-/*app.post('/login',
-  passport.authenticate('local', { successRedirect: '/',
-                                   failureRedirect: '/',
-                                   failureFlash: true
-                                 })
-);*/
-
-
-app.post('/login', function(req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
-    if (err) return next(err);
-    // Redirect if it fails
-    if (!user){
-      console.log('info: '+info);
-      return res.status(200).json(info);
-    }
-    req.logIn(user, function(err) {
-      if (err) { return next(err); }
-      // Redirect if it succeeds
-      return res.status(200).json({message: 'Logged in',"data": user.name});
-    });
-  })(req, res, next);
-
-});
-
-
-/*app.get('/login', function(req, res) {
-    console.log(flash('error'));
-    res.send();
-});*/
-    /*app.post('/login', function(req, res, next) {
-        console.log("---xxx--");
-        console.log(req.body);
-        console.log("---xxx--");
-  passport.authenticate('local', function(err, user, info) {
-    if (err) { return next(err); }
-    if (!user) { console.log("no user"); return res.redirect('/login'); }
-    req.logIn(user, function(err) {
-      if (err) { console.log("login problem"); return next(err); }
-        console.log("can login");
-      return res.redirect('/users/' + user.username);
-    });
-  })(req, res, next);
-});*/
-
-
-
-
-/*    var passport = require('passport');
-    passport.use(User.localStrategy);
-passport.serializeUser(User.serializeUser);
-passport.deserializeUser(User.deserializeUser);
-
-    app.use(passport.initialize());
-app.use(passport.session());
-    var auth = require('../public/javascripts/authCon.js');
-
-app.post('/auth/login', auth.login);
-app.post('/auth/logout', auth.logout);
-app.get('/auth/login/success', auth.loginSuccess);
-app.get('/auth/login/failure', auth.loginFailure);
-app.post('/auth/register', auth.register);*/
-
-
-//-authentication-authentication-authentication-authentication-authentication-authentication-authentication-
-
-  //not a good way to do GET, consider using query to specify details
-  /*app.get('/items', function(req, res, next) {
-    item.find(function(err, items){
-      if(err){ return next(err); }
-      items_out = [];
-      for(var i=0; i<items.length && i<25; i++){
-
-        if(items[i].title != null && items[i].images.length!=0){
-          items_out.push(items[i]);
+  passport.use(new LocalStrategy({
+      usernameField: 'email',
+      passwordField: 'password'
+    },
+    function(username, password, done) {
+      User.findOne({ email: username }, function (err, user) {
+        if (err) {
+          console.log("err");
+          return done(err);
         }
-      }
-      res.json(items_out);
-    });
-  });*/
+        if (!user) {
+          console.log("No user with this email");
+          return done(null, false, { message: 'Incorrect email.' });
+        }
 
+        var bcrypt = require('bcrypt');
+        if (!bcrypt.compareSync(password, user.password)) { console.log("Wrong password");
+          return done(null, false, { message: 'Incorrect password.' });
+        }
+        return done(null, user);
+      });
+    }
+  ));
+
+
+  //Serialize and Deserialize user functions provided so that passport knows
+  //how to access the user
+  passport.serializeUser(function(user, done) {
+    done(null, user._id);
+  });
+
+  passport.deserializeUser(function(id, done) {
+    User.findById(id, function(err, user) {
+      done(err, user);
+    });
+  });
+
+
+  app.post('/login', function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+      if (err) return next(err);
+      // Redirect if it fails
+      if (!user){
+        console.log('info: '+info);
+        return res.status(200).json(info);
+      }
+      req.logIn(user, function(err) {
+        if (err) { return next(err); }
+        // Redirect if it succeeds
+        return res.status(200).json({message: 'Logged in',"data": user.name});
+      });
+    })(req, res, next);
+
+  });
+
+  //Homepage - retrieve top items
+  //needs fixing for a real algorithm that sorts....
   app.get('/items', function(req, res, next) {
     item.find(req.query.where).sort(req.query.sort).skip(req.query.skip).limit(req.query.limit).exec(function(err, items){
       if(err){ return next(err); }
@@ -171,20 +98,6 @@ app.post('/auth/register', auth.register);*/
     });
     console.log(req.user);
   });
-
-  /*app.get('/users', function(req, res, next) {
-    User.find(function(err, users){
-      if(err){ return next(err); }
-      Users_out = [];
-      for(var i=0; i<users.length; i++){
-
-        if(users[i].email != null){
-          Users_out.push(users[i]);
-        }
-      }
-      res.json(Users_out);
-    });
-  });*/
 
   app.get('/users', function(req, res, next) {
     User.find(req.query.where).sort(req.query.sort).skip(req.query.skip).limit(req.query.limit).exec(function(err, users){
@@ -235,6 +148,7 @@ app.post('/auth/register', auth.register);*/
 
     var item_instance = new item({
       title: null,
+      user: null,
       description: null,
       tag: null,
       price: null,
@@ -283,6 +197,7 @@ app.post('/auth/register', auth.register);*/
       //item.find({ _id: mongoose.Types.ObjectId(req.body.id)}, function(err, instances){
       item.findOne({ _id: req.body.id}, function(err, instances){
         instances.title = req.body.title;
+        instances.user = req.user.name;
         instances.description = req.body.description;
         instances.price = req.body.price;
         instances.trade = req.body.trade;
