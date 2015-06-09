@@ -1,4 +1,4 @@
-/*var express = require('express')
+var express = require('express')
 var app = express()
 
 //Database Stuff
@@ -22,15 +22,15 @@ app.get('/', function (req, res) {
 
 
 
-//var server = app.listen(80, '172.31.36.56', function () {
+var server = app.listen(80, '172.31.36.56', function () {
 //var server = app.listen(80, 'localhost', function () {
   var host = server.address().address
   var port = server.address().port
 
   console.log('Example app listening at http://%s:%s', host, port)
 
-})*/
-
+})
+/*
 var express = require('express')
 var app = express()
 
@@ -57,3 +57,4 @@ app.get('/', function (req, res) {
 var port = process.env.PORT || 4000;
 app.listen(port);
 console.log('Server running on port ' + port);
+*/
