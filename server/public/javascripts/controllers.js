@@ -84,7 +84,7 @@ controllers.controller('view_controller', ['$scope', '$http', '$routeParams',
       //retrieve item data from the get request
       $scope.item=angular.fromJson(data);
       $scope.images = $scope.item.images;
-
+      console.log($scope.item)
       //Manage the check marks next to the items
       if(!$scope.item.methods.facebook) $("#facebook").attr('class', 'glyphicon glyphicon-remove');
       if(!$scope.item.methods.txtmsg)  $("#txtmsg").attr('class', 'glyphicon glyphicon-remove');
